@@ -46,6 +46,7 @@ Game.prototype.playersGuessSubmission = function (guess) {
 
 Game.prototype.checkGuess = function () {
     if (this.playersGuess === this.winningNumber) {
+        this.pastGuesses.push(this.playersGuess);
         return 'You Win!';
     } else if (this.pastGuesses.indexOf(this.playersGuess) > -1) {
         console.log("Aready guess: " + this.pastGuesses.indexOf(this.playersGuess));
@@ -98,7 +99,6 @@ controller.enterPlayerGuess = function () {
         } else {
             $('#subtitle').text(game.isLower() ? "Guess Higher" : "Guess Lower");
         }
-
         for (var i = 0; i < game.pastGuesses.length; i++) {
             $('#guess-list li:nth-child(' + (i + 1) + ')').text(game.pastGuesses[i]);
         }
@@ -109,6 +109,7 @@ controller.enterPlayerGuess = function () {
             $('#subtitle').text(game.isLower() ? "Guess Higher than " + game.pastGuesses[game.pastGuesses.length - 1] : "Guess Lower than " + game.pastGuesses[game.pastGuesses.length - 1]);
         }
     } finally {
+
         delete controller.guessOutput;
     }
 

@@ -5,8 +5,8 @@
 	<title>Guessing Game</title>
 
 	<!-- Bootstrap and CSS here-->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj"
-		crossorigin="anonymous">
+	<link rel="stylesheet" href="./node_modules/tether/dist/css/tether.min.css">
+	<link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./css/style.css">
 </head>
 
@@ -24,7 +24,7 @@
 			<div id='input-parent'>
 				<!-- Player's guess input, and submit button -->
 				<input id='players-input' type='text' autofocus=true placeholder='#' maxlength='3'>
-				<button id='submit' class='btn btn-success'>Go!</buton>
+				<button id='submit' class='btn btn-success'>Go!</button>
           </div>
 
           <div id='guesses'>
@@ -36,7 +36,7 @@
                   <li class='guess' id='guess-four'>-</li>
                   <li class='guess' id='guess-five'>-</li>
               </ul>
-            
+
           </div>
 
           <div id="menu-btns">
@@ -52,7 +52,7 @@
 	<div id='footer' class='center'>
 		<div class='row'>
 			<div class='col-sm-4'>
-				<img class='img-responsive' src='./img/fa-logo@2x.png'></img>
+				<img class='img-responsive' src='./img/fa-logo@2x.png'>
 			</div>
 
 			<div class='col-sm-4'>
@@ -60,7 +60,7 @@
 			</div>
 
 			<div class='col-sm-4'>
-				<img class='img-responsive' src='./img/grace_hopper_academy.png'></img>
+				<img class='img-responsive' src='./img/grace_hopper_academy.png'>
 			</div>
 
 
@@ -68,12 +68,11 @@
 	</div>
 
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY"
-		crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB"
-		crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU"
-		crossorigin="anonymous"></script>
+	<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="./node_modules/tether/dist/js/tether.min.js"></script>
+	<script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="./js/GuessingGame.js"></script>
+	<!--<script src="./js/GuessingGame_spec.js"></script>-->
 
 </body>
 

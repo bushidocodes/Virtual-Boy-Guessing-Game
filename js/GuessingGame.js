@@ -1,10 +1,12 @@
+var game, controller;
+
 function generateWinningNumber() {
     return Math.floor(Math.random() * 100 + 1);
 }
 
 // Implements Fisher-Yates Algorithm
 // https://www.frankmitchell.org/2015/01/fisher-yates/
-function shuffle(arr){
+function shuffle(arr) {
     var i = 0, j = 0, temp = 0;
     for (i = arr.length - 1; i > 0; i -= 1) {
         j = Math.floor(Math.random() * (i + 1));
@@ -15,7 +17,7 @@ function shuffle(arr){
     return arr;
 }
 
-function Game(){
+function Game() {
     this.playersGuess = null;
     this.pastGuesses = [];
     this.winningNumber = generateWinningNumber();
@@ -45,7 +47,8 @@ Game.prototype.playersGuessSubmission = function (guess) {
 Game.prototype.checkGuess = function () {
     if (this.playersGuess === this.winningNumber) {
         return 'You Win!';
-    } else if (this.pastGuesses.indexOf(this.playersGuess) !== -1) {
+    } else if (this.pastGuesses.indexOf(this.playersGuess) > -1) {
+        console.log("Aready guess: " + this.pastGuesses.indexOf(this.playersGuess));
         return 'You have already guessed that number.';
     } else {
         this.pastGuesses.push(this.playersGuess);
@@ -67,10 +70,47 @@ Game.prototype.checkGuess = function () {
     }
 };
 
-Game.prototype.provideHint = function(){
+Game.prototype.provideHint = function () {
     return shuffle([this.winningNumber, generateWinningNumber(), generateWinningNumber()]);
 };
 
-function newGame () {
-    return new Game;
-}
+controller = {};
+controller.enterPlayerGuess = function() {
+    // Save player's guess and clear UI
+    controller.guessInput = parseInt($('#players-input').val(), 10);
+    $('#players-input').val("");
+    $('#players-input').focus();
+
+    // Submit the player's guess, save the result
+    controller.guessOutput = game.playersGuessSubmission(controller.guessInput);
+    delete controller.guessInput;
+
+    // Render the results to screen
+    $('#title').text(controller.guessOutput);
+    $('#subtitle').text(game.isLower() ? "Guess Higher" : "Guess Lower");
+    for (var i = 0; i < game.pastGuesses.length; i++) {
+        $('#guess-list li:nth-child(' + (i + 1) + ')').text(game.pastGuesses[i]);
+    }
+    delete controller.guessOutput;
+};
+
+$(document).ready(function () {
+    game = new Game();
+    $('#submit').click(controller.enterPlayerGuess);
+    $('#players-input').keypress(function(event){
+        if (event.which === 13) {
+            controller.enterPlayerGuess();
+        }
+    });
+
+    $('#reset').click(function () {
+        game = new Game();
+        $('#title').text('Guessing Game!');
+        $('#subtitle').text('Guess a number between 1-100!');
+        for (var i = 0; i < 5; i++) {
+            $('#guess-list li:nth-child(' + (i + 1) + ')').text("-");
+        }
+        $('#players-input').focus();
+
+    });
+});

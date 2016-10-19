@@ -1,0 +1,15 @@
+{
+  "name": "guessing-game-final",
+  "version": "1.0.0",
+  "description": "In this section of the Guessing Game Project, you will be using Test Driven development to build out the functions that you'll need for the functionality of your Guessing Game.",
+  "main": "index.html",
+  "dependencies": {},
+  "devDependencies": {
+    "bootstrap": "^4.0.0-alpha.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sean McBride",
+  "license": "ISC"
+}

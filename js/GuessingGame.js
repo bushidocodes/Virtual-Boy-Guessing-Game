@@ -49,7 +49,7 @@ Game.prototype.checkGuess = function () {
         return 'You Win!';
     } else if (this.pastGuesses.indexOf(this.playersGuess) > -1) {
         console.log("Aready guess: " + this.pastGuesses.indexOf(this.playersGuess));
-        return 'You have already guessed that number.';
+        return 'You already guessed ' + this.playersGuess;
     } else {
         this.pastGuesses.push(this.playersGuess);
         if (this.pastGuesses.length >= 5) {
@@ -75,29 +75,40 @@ Game.prototype.provideHint = function () {
 };
 
 controller = {};
-controller.enterPlayerGuess = function() {
+controller.enterPlayerGuess = function () {
     // Save player's guess and clear UI
     controller.guessInput = parseInt($('#players-input').val(), 10);
     $('#players-input').val("");
     $('#players-input').focus();
 
-    // Submit the player's guess, save the result
-    controller.guessOutput = game.playersGuessSubmission(controller.guessInput);
-    delete controller.guessInput;
 
-    // Render the results to screen
-    $('#title').text(controller.guessOutput);
-    $('#subtitle').text(game.isLower() ? "Guess Higher" : "Guess Lower");
-    for (var i = 0; i < game.pastGuesses.length; i++) {
-        $('#guess-list li:nth-child(' + (i + 1) + ')').text(game.pastGuesses[i]);
+    try {
+        // Submit the player's guess, save the result
+        controller.guessOutput = game.playersGuessSubmission(controller.guessInput);
+        // Render the results to screen
+        $('#title').text(controller.guessOutput);
+        $('#subtitle').text(game.isLower() ? "Guess Higher" : "Guess Lower");
+        for (var i = 0; i < game.pastGuesses.length; i++) {
+            $('#guess-list li:nth-child(' + (i + 1) + ')').text(game.pastGuesses[i]);
+        }
+        delete controller.guessInput;
+    } catch (err) {
+        $('#title').text(err);
+        if (game.pastGuesses.length > 0) {
+            $('#subtitle').text(game.isLower() ? "Guess Higher than " + game.pastGuesses[game.pastGuesses.length - 1] : "Guess Lower than " + game.pastGuesses[game.pastGuesses.length - 1]);
+        }
+    } finally {
+        delete controller.guessOutput;
     }
-    delete controller.guessOutput;
+
+
+
 };
 
 $(document).ready(function () {
     game = new Game();
     $('#submit').click(controller.enterPlayerGuess);
-    $('#players-input').keypress(function(event){
+    $('#players-input').keypress(function (event) {
         if (event.which === 13) {
             controller.enterPlayerGuess();
         }

@@ -53,7 +53,7 @@ Game.prototype.checkGuess = function () {
     } else {
         this.pastGuesses.push(this.playersGuess);
         if (this.pastGuesses.length >= 5) {
-            return 'You Lose.';
+            return 'You Lose. Was ' + this.winningNumber;
         }
         if (Math.abs(this.playersGuess - this.winningNumber) < 10) {
             return "You're burning up!";
@@ -87,11 +87,14 @@ controller.enterPlayerGuess = function () {
         controller.guessOutput = game.playersGuessSubmission(controller.guessInput);
         // Render the results to screen
         $('#title').text(controller.guessOutput);
-        if (controller.guessOutput === "You Win!" || controller.guessOutput === 'You Lose.') {
+        // alert(controller.guessOutput.slice(0,8));
+        if (controller.guessOutput === "You Win!" || controller.guessOutput.slice(0,9) === 'You Lose.') {
             $('#subtitle').text('Click Reset to play again');
-            $('#submit').attr("disabled", "true");
-            $('#hint').attr("disabled", "true");
-            $('#players-input').off('keypress');
+            $('#submit').attr("disabled", true);
+            $('#hint').attr("disabled", true);
+            $('#players-input').attr("disabled", true);
+            // $('#reset').focus();
+            // $('#players-input').off('keypress');
         } else {
             $('#subtitle').text(game.isLower() ? "Guess Higher" : "Guess Lower");
         }
@@ -129,13 +132,20 @@ $(document).ready(function () {
         for (var i = 0; i < 5; i++) {
             $('#guess-list li:nth-child(' + (i + 1) + ')').text("-");
         }
-        $('#players-input').focus();
         $('#submit').attr("disabled", false);
         $('#hint').attr("disabled", false);
-        $('#players-input').keypress(function (event) {
-            if (event.which === 13) {
-                controller.enterPlayerGuess();
-            }
-        });
+        $('#players-input').attr("disabled", false);
+        $('#players-input').focus();
+        // $('#players-input').keypress(function (event) {
+        //     if (event.which === 13) {
+        //         controller.enterPlayerGuess();
+        //     }
+        // });
+    });
+
+    $('#hint').click(function () {
+        $('#title').text(game.provideHint().join("? ") + "?");
+        $('#hint').attr("disabled", true);
+        $('#players-input').focus();
     });
 });

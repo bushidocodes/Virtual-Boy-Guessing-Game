@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+	<meta name=viewport content="width=device-width, initial-scale=1">
 	<title>Guessing Game</title>
 
 	<!-- Bootstrap and CSS here-->
@@ -14,34 +15,38 @@
 
 	<div id='app' class='center container'>
 
-		<div id='headers'>
+		<div id='headers' class='row'>
 			<!-- Title and subtitles! -->
-			<h1 id='title'>Guessing Game!</h1>
-			<h2 id='subtitle'>Guess a number between 1-100!</h2>
+			<h1 class='col-xs-12' id='title'>Guessing Game!</h1>
+			<h2 class='col-xs-12' id='subtitle'>Guess a number between 1-100!</h2>
 		</div>
 
 		<div id='main'>
-			<div id='input-parent'>
-				<!-- Player's guess input, and submit button -->
-				<input id='players-input' type='text' autofocus=true placeholder='#' maxlength='3'>
-				<button id='submit' class='btn btn-success'>Go!</button>
-          </div>
+			<div class='row'>
+				<div id='input-parent' class='col-xs-8'>
+					<!-- Player's guess input, and submit button -->
+					<input id='players-input' type='text' autofocus=true placeholder='?' maxlength='3'>
+					<button id='submit' class='btn btn-success'>Go!</button>
+				</div>
+			</div>
 
-          <div id='guesses'>
-              <!-- unordered list of guesses -->
-              <ul id='guess-list'>
-                  <li class='guess' id='guess-one'>-</li>
-                  <li class='guess' id='guess-two'>-</li>
-                  <li class='guess' id='guess-three'>-</li>
-                  <li class='guess' id='guess-four'>-</li>
-                  <li class='guess' id='guess-five'>-</li>
-              </ul>
+			<div class='row' id='guesses'>
+				<!-- unordered list of guesses -->
+				<!--<div>-->
+				<ul id='guess-list'>
+					<li class='guess col-xs-4 col-sm-2 mx-auto' id='guess-one'>-</li>
+					<li class='guess col-xs-4 col-sm-2 mx-auto' id='guess-two'>-</li>
+					<li class='guess col-xs-4 col-sm-2 mx-auto' id='guess-three'>-</li>
+					<li class='guess col-xs-4 col-sm-2 mx-auto' id='guess-four'>-</li>
+					<li class='guess col-xs-4 col-sm-2 mx-auto' id='guess-five'>-</li>
+				</ul>
+				<!--</div>-->
 
-          </div>
+			</div>
 
-          <div id="menu-btns">
-            <!-- reset and hint buttons -->
-            <button class='btn btn-warning' id='reset'>Reset</button>
+			<div id="menu-btns">
+				<!-- reset and hint buttons -->
+				<button class='btn btn-warning' id='reset'>Reset</button>
 				<button class='btn btn-info' id='hint'>Hint</button>
 			</div>
 		</div>
@@ -50,19 +55,19 @@
 
 
 	<div id='footer' class='center'>
-		<div class='row'>
-			<div class='col-sm-4'>
-				<img class='img-responsive' src='./img/fa-logo@2x.png'>
+		<div class='row footer-row'>
+			<div class='col-xs-6'>
+				<img src='./img/fa-logo@2x.png'>
 			</div>
 
-			<div class='col-sm-4'>
-				<h4>Project by Sean McBride</h4>
+			<div class='col-xs-6 vert-center'>
+				<h4>Sean McBride</h4>
 			</div>
 
-			<div class='col-sm-4'>
+			<!--<div class='col-sm-4'>
 				<img class='img-responsive' src='./img/grace_hopper_academy.png'>
 			</div>
-
+-->
 
 		</div>
 	</div>

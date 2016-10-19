@@ -1,5 +1,11 @@
 html {
-  box-sizing: 'border-box'
+  box-sizing: 'border-box';
+  background-color: black;
+  color: white;
+}
+
+body {
+    background-color: black;
 }
 
 ul {
@@ -7,10 +13,42 @@ ul {
     padding: 0;
 }
 
-img {
+/*img {
     display: inline;
     width: 200px;
     height: 50px;
+}*/
+h1 {
+    font-size: 3em;
+}
+h2 {
+    font-size: 1em;
+}
+
+
+h4 {
+    font-size: 100%;
+}
+@media (min-width: 800px) {
+    h4 {
+        font-size: 36pt;
+    }
+}
+
+
+.vert-center {
+    position: relative;
+    top: 50%;
+    /*transform: translateY(-50%);*/
+}
+
+h1, h2 {
+    color: mediumseagreen;
+}
+
+img {
+    width: 40vw;
+    max-width: 250px;
 }
 
 .center {
@@ -21,12 +59,23 @@ img {
     display: inline;
     border: solid 1px black;
     border-radius: 10%;
-    font-size:60px;
-    padding: 0 25px;
+    font-size: 6vw;
+    padding: 0 5px;
+    background-color: mediumseagreen;
+    width: 20%;
+    max-width: 200px;
+    height: 20vw;
+    max-height: 200px;
 }
 
+/*@media (min-width: 800px) {
+    .guess {
+        font-size: 36pt;
+    }
+}*/
+
 #app {
-    background-image: url('../img/riddler.jpg');
+    /*background-image: url('../img/riddler.jpg');*/
 }
 
 #footer {
@@ -35,29 +84,55 @@ img {
     background-color: white;
     position: fixed;
     bottom: 0;
+    max-height: 100px;
+}
+
+.footer-row {
+    height: 100%;
 }
 
 #input-parent {
-    height: 160px;
-    width: 160px;
-    margin: 5% auto 50px;
+    /*height: 160px;
+    width: 160px;*/
+    /*margin: 5% auto 50px;*/
+    float: none;
+    margin: 0 auto;
     position: relative;
+    height: 80vw;
+    max-height: 400px;
+    width: 80%;
+    max-width: 400px;
 }
 
 #players-input {
     border-radius: 90%;
-    height: 160px;
-    width: 160px;
+    /*height: 160px;
+    width: 160px;*/
+    height: 100%;
+    width: 100%;
     position: absolute;
     left: 0px;
     text-align: center;
-    font-size: 60px;
+    font-size: 8em;
+    background-color: mediumseagreen;
+    color: black;
 }
 #submit {
     border-radius: 90%;
-    height: 60px;
-    width: 60px;
+    /*height: 60px;
+    width: 60px;*/
+    height: 38%;
+    width: 38%;
     position: absolute;
-    top: 100px;
-    left: 100px;
+    /*top: 100px;
+    left: 100px;*/
+    top: 62%;
+    left: 62%;
+    background-color: black;
+    color: mediumseagreen;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
 }

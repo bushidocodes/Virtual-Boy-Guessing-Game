@@ -1,11 +1,22 @@
+<!--
+______________________________________________________________________________
+|                  |`````| ||  || ||    ||     /```/ |````|  /\    // || //   |
+|      //\\        |  |``` ||  || ||    ||     \ \`   `||`  //\\  //  ||//    |
+|    ///  \\\      |  ```| ||  || ||__  ||__    _\ \   ||  //  \\ \\  ||\\    |
+|  ///      \\\    |__|``` \\__// |___| |___|  \___/   || //    \\ \\ || \\   |
+|  \\\  /\  ///                                                               |
+|    \\//\\//       //\\   //  //\\  ||\\  ||^^   /\  /\  \\  //              |
+|      \\//        ||__|| ||  ||__|| || || ||==  //\\//\\   ||                |
+|                  ||``||  \\ ||``|| ||//  ||,, //  \/  \\  ||                |
+```````````````````````````````````````````````````````````````````````````````
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 	<meta name=viewport content="width=device-width, initial-scale=1">
-	<title>Guessing Game</title>
-
-	<!-- Bootstrap and CSS here-->
+	<title>Vector Guess</title>
 	<link rel="stylesheet" href="./node_modules/tether/dist/css/tether.min.css">
 	<link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./css/style.css">
@@ -15,24 +26,21 @@
 
 	<div id='app' class='center container'>
 
-		<div id='headers' class='row'>
-			<!-- Title and subtitles! -->
-			<h1 class='col-xs-12' id='title'>Guessing Game!</h1>
+		<header class='row'>
+			<h1 class='col-xs-12' id='title'>Vector Guess</h1>
 			<h2 class='col-xs-12' id='subtitle'>Guess a number between 1-100!</h2>
-		</div>
+		</header>
 
-		<div id='main'>
-			<div class='row'>
+		<main>
+			<section class='row'>
 				<div id='input-parent' class='col-xs-8'>
 					<!-- Player's guess input, and submit button -->
-					<input id='players-input' type='text' autofocus=true placeholder='?' maxlength='3'>
+					<input id='players-input' type='text' autofocus=true placeholder='?' pattern=^[1-9][0-9]?$|^100$ maxlength="3">
 					<button id='submit' class='btn btn-success'>Go!</button>
 				</div>
-			</div>
+			</section>
 
-			<div class='row' id='guesses'>
-				<!-- unordered list of guesses -->
-				<!--<div>-->
+			<section class='row' id='guesses'>
 				<ul id='guess-list'>
 					<li class='guess col-xs-4 col-sm-2 mx-auto' id='guess-one'>-</li>
 					<li class='guess col-xs-4 col-sm-2 mx-auto' id='guess-two'>-</li>
@@ -40,37 +48,29 @@
 					<li class='guess col-xs-4 col-sm-2 mx-auto' id='guess-four'>-</li>
 					<li class='guess col-xs-4 col-sm-2 mx-auto' id='guess-five'>-</li>
 				</ul>
-				<!--</div>-->
 
-			</div>
+			</section>
 
-			<div id="menu-btns">
+			<section class='row' id="menu-btns">
 				<!-- reset and hint buttons -->
-				<button class='btn btn-warning' id='reset'>Reset</button>
-				<button class='btn btn-info' id='hint'>Hint</button>
-			</div>
-		</div>
+				<button class='btn' id='reset'>Reset</button>
+				<button class='btn' id='hint'>Hint</button>
+			</section>
+		</main>
 	</div>
 
 
 
-	<div id='footer' class='center'>
+	<footer class='center'>
 		<div class='row footer-row'>
 			<div class='col-xs-6'>
-				<img src='./img/fa-logo@2x.png'>
+				<img src='./img/fa-logo.svg'>
 			</div>
-
 			<div class='col-xs-6 vert-center'>
 				<h4>Sean McBride</h4>
 			</div>
-
-			<!--<div class='col-sm-4'>
-				<img class='img-responsive' src='./img/grace_hopper_academy.png'>
-			</div>
--->
-
 		</div>
-	</div>
+	</footer>
 
 
 	<script src="./node_modules/jquery/dist/jquery.min.js"></script>
@@ -80,5 +80,4 @@
 	<!--<script src="./js/GuessingGame_spec.js"></script>-->
 
 </body>
-
 </html>

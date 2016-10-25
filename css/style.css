@@ -20,6 +20,8 @@ ______________________________________________________________________________
         color: red;
         border-color: red;
         font-family: Orbitron, sans-serif;
+        text-align: center;
+        height: 100%;
     }
     input {
         border-color: red;
@@ -40,21 +42,22 @@ ______________________________________________________________________________
 /* LAYOUT AND ALIGNMENT */
 /*Styling has been refactored to follow the order of the HTML to better reason about flexbox*/
 
-/* Body is a flexbox with header, main and footer*/
-
-
 body {
+    /*Flexbox containing header, main, and footer*/
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    text-align: center;
-    /*width: 100%;*/
+
+    height: 100%;
 }
 
     header {
         /*Flex Element in body Flexbox*/
-        flex: 1 1 auto;
+        flex: 0 0 auto;
+
+        border-bottom: solid 2px;
+        width: 100%;
     }
 
         #title {
@@ -68,34 +71,20 @@ body {
 
     main {
         /*Flex Element in body Flexbox*/
-        flex-grow: 4 4 auto;
+        flex: 1 1 auto;
         /*Flexbox containing input-section, guess-section, and menu-section*/
         display: flex;
         flex-direction: column;
+        justify-content: space-around;
         align-items: center;
     }
 
         #input-section {
             /* Set to relative to contain the absolute child elements */
             position: relative;
-            flex: 1 1 auto;
-            /*max-height: 400px;*/
-            /*max-width: 400px;*/
-
-            flex-basis: 200px;
-            width: 200px;
-            /*min-width: 0;*/
-            /* Size to take up 70% of the width of the screen up to a max of 400px */
-            /*height: 70vw;
-            width: 70vw;*/
+            flex: 0 1 250px;
+            width: 250px;
         }
-
-            /* display .#players-input as 1:1 ratio */
-            /*#input-section:before {
-                display: block;
-                content: '';
-                margin-top: 100%;
-            }*/
 
             #players-input {
                 /* Fill the #input-parent container */
@@ -110,8 +99,6 @@ body {
                 /* Center input text and placeholder and set font-size to 8em*/
                 text-align: center;
                 font-size: 8em;
-
-
             }
 
             #submit {
@@ -126,19 +113,25 @@ body {
                 border-radius: 50%;
             }
 
+
+            /* TODO: Create breakpoints targeting the flex and width of #input section and the fontsize of #players-input and the fontsize of #submit*/
+
+
         #guess-section {
             flex: 0 0 auto;
         }
 
             #guess-list {
                 display: flex;
+                flex-direction: row;
                 justify-content: center;
-                align-items: baseline;
+                align-items: center;
                 list-style: none;
-                padding: 0;
+                padding: 0; /* For some reason, this is needed to maintain alignment*/
             }
 
                 .guess {
+                    flex: 0 1 auto;
                     /*display: inline;*/
                     border: solid 2px;
                     border-radius: 10%;
@@ -146,10 +139,10 @@ body {
 
                     padding: 0 2px;
                     /* The guess boxes are sized to be large enough to render 100 without the width changing at 6vw */
-                    width: 12.3551vw;
+                    /*width: 12.3551vw;
                     height: 12.3551vw;
                     max-width: 135px;
-                    max-height: 135px;
+                    max-height: 135px;*/
 
                     margin: 0 2px;
                 }
@@ -163,37 +156,39 @@ body {
         #menu-section {
             flex: 0 0 auto;
         }
+
+        #reset {
+            margin-right: 5px;
+        }
     footer {
         /*Flex Element in body Flexbox*/
-        flex: 1 1 auto;
-
-
-        /*Absolutely positiion 100px tall footer with Fullstack logo and my name*/
-        /*position: fixed;*/
-        /*bottom: 0;
-        max-height: 73px;
-        width: 100%;*/
-
+        flex: 0 0 73px;
 
         border-top: solid 2px;
+        width: 100%;
+
         /* Use flexbox to make image and name flow responsively */
         display: flex;
+        flex-direction: row;
         justify-content: space-around;
         align-items: center;
     }
         /*This currently only affects the Fullstack logo SVG. This may need to be changed to accomodate the footer flexbox layout*/
         #footer-logo {
+            /*Flex Element in footer Flexbox*/
+            flex: 0 1 auto;
+
             width: 40vw;
-            max-width: 250px;
+            max-width: 280px;
         }
 
         /*These media queries resize my name in the footer*/
         #footer-name {
+            /*Flex Element in footer Flexbox*/
+            flex: 0 0 auto;
+            /*Override default h4*/
             font-size: 12pt;
-            /*flex-grow: 0;*/
-            /*display: inline;*/
-            /*margin: 0 0;*/
-            /*vertical-align: center;*/
+            margin: 0 0;
         }
 
         @media (min-width: 360px) {
@@ -213,25 +208,3 @@ body {
                 font-size: 36pt;
             }
         }
-
-
-
-
-
-
-
-
-
-
-/* Class Selectors */
-
-
-
-/* ID Selectors */
-
-
-
-
-
-
-

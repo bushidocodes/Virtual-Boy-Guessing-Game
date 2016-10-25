@@ -10,37 +10,24 @@ ______________________________________________________________________________
 |                  ||``||  \\ ||``|| ||//  ||,, //  \/  \\  ||                |
 ```````````````````````````````````````````````````````````````````````````````
 -->
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta name=viewport content="width=device-width, initial-scale=1">
 	<title>Vector Guess</title>
-	<!--<link rel="stylesheet" href="./node_modules/tether/dist/css/tether.min.css">-->
-	<!--<link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">-->
 	<link rel="stylesheet" href="./css/normalize.css">
 	<link rel="stylesheet" href="./css/style.css">
 </head>
-
 <body>
-
-	<!--<div id='app'>-->
-
 	<header>
 		<h1 id='title'>Vector Guess</h1>
 		<h2 id='subtitle'>Guess a number between 1-100!</h2>
 	</header>
-
 	<main>
 		<section id='input-section'>
-			<!--<div id='input-parent'>-->
-			<!-- Player's guess input, and submit button -->
 			<input id='players-input' type='text' autofocus=true placeholder='?' pattern=^[1-9][0-9]?$|^100$ maxlength="3">
 			<button id='submit'>Go!</button>
-			<!--</div>-->
 		</section>
-
 		<section id='guess-section'>
 			<ul id='guess-list'>
 				<li class='guess' id='guess-one'>-</li>
@@ -49,31 +36,18 @@ ______________________________________________________________________________
 				<li class='guess' id='guess-four'>-</li>
 				<li class='guess' id='guess-five'>-</li>
 			</ul>
-
 		</section>
-
 		<section id="menu-section">
-			<!-- reset and hint buttons -->
 			<button id='reset'>Reset</button>
 			<button id='hint'>Hint</button>
 		</section>
 	</main>
-	<!--</div>-->
-
-
-
 	<footer>
 		<img id="footer-logo" src='./img/fa-logo.svg'>
 		<h4 id="footer-name">Sean McBride</h4>
 	</footer>
-
-
-	<script src="./node_modules/jquery/dist/jquery.min.js"></script>
-	<!--<script src="./node_modules/tether/dist/js/tether.min.js"></script>-->
-	<!--<script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>-->
+	<script src="./js/jquery-3.1.1.slim.min.js"></script>
 	<script src="./js/GuessingGame.js"></script>
 	<!--<script src="./js/GuessingGame_spec.js"></script>-->
-
 </body>
-
 </html>

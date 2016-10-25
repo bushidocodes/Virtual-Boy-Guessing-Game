@@ -11,174 +11,227 @@ ______________________________________________________________________________
 ```````````````````````````````````````````````````````````````````````````````
 */
 
- @font-face { font-family: Orbitron; src: url('../fonts/orbitron-medium.otf'); }
 
-/* HTML Tag Selectors */
-
-html, body {
-  box-sizing: 'border-box';
-  background-color: black;
-  color: red;
-  font-family: Orbitron, sans-serif;
-}
-
-
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-h1 {
-    font-size: 2.4em;
-}
-h2 {
-    font-size: 1em;
-}
-
-h4 {
-    font-size: 14pt;
-}
-
-@media (min-width: 450px) {
-    h4 {
-        font-size: 24pt;
+/* FONTS AND COLORS*/
+    @font-face { font-family: Orbitron; src: url('../fonts/orbitron-medium.otf'); }
+    html {
+        box-sizing: 'border-box';
+        background-color: black;
+        color: red;
+        border-color: red;
+        font-family: Orbitron, sans-serif;
     }
-}
-
-@media (min-width: 800px) {
-    h4 {
-        font-size: 36pt;
+    input {
+        border-color: red;
+        background-color: black;
+        color: red;
     }
+    button {
+        border: solid 2px;
+        background-color: black;
+        color: red;
+    }
+    /* CSS Hack: Override the default color used in the placeholder text for a text input */
+    ::-webkit-input-placeholder {color: red;}
+    :-moz-placeholder {color: red;} /* Firefox 18- */
+    ::-moz-placeholder {color: red;}/* Firefox 19+ */
+    :-ms-input-placeholder {color: red;}
+
+/* LAYOUT AND ALIGNMENT */
+/*Styling has been refactored to follow the order of the HTML to better reason about flexbox*/
+
+/* Body is a flexbox with header, main and footer*/
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    /*width: 100%;*/
 }
 
-img {
-    width: 40vw;
-    max-width: 250px;
-}
+    header {
+        /*Flex Element in body Flexbox*/
+        flex: 1 1 auto;
+    }
 
-footer {
-    width: 100%;
-    border-top: solid 2px red;
-    background-color: black;
-    position: fixed;
-    bottom: 0;
-    max-height: 100px;
-}
+        #title {
+            font-size: 2.4em;
+            margin: 0 0;
+        }
+        #subtitle {
+            font-size: 1em;
+            margin: 0 0;
+        }
+
+    main {
+        /*Flex Element in body Flexbox*/
+        flex-grow: 4 4 auto;
+        /*Flexbox containing input-section, guess-section, and menu-section*/
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+        #input-section {
+            /* Set to relative to contain the absolute child elements */
+            position: relative;
+            flex: 1 1 auto;
+            /*max-height: 400px;*/
+            /*max-width: 400px;*/
+
+            flex-basis: 200px;
+            width: 200px;
+            /*min-width: 0;*/
+            /* Size to take up 70% of the width of the screen up to a max of 400px */
+            /*height: 70vw;
+            width: 70vw;*/
+        }
+
+            /* display .#players-input as 1:1 ratio */
+            /*#input-section:before {
+                display: block;
+                content: '';
+                margin-top: 100%;
+            }*/
+
+            #players-input {
+                /* Fill the #input-parent container */
+                position: absolute;
+                left: 0px;
+                top: 0px;
+                height: 100%;
+                width: 100%;
+                /*Round border of 2px */
+                border: solid 2px;
+                border-radius: 50%;
+                /* Center input text and placeholder and set font-size to 8em*/
+                text-align: center;
+                font-size: 8em;
+
+
+            }
+
+            #submit {
+                /* Position element 62% over and down in #input-parent and size to fill 38% of #input-parent*/
+                position: absolute;
+                top: 62%;
+                left: 62%;
+                height: 38%;
+                width: 38%;
+                /* Round border of 6px */
+                border: solid 6px;
+                border-radius: 50%;
+            }
+
+        #guess-section {
+            flex: 0 0 auto;
+        }
+
+            #guess-list {
+                display: flex;
+                justify-content: center;
+                align-items: baseline;
+                list-style: none;
+                padding: 0;
+            }
+
+                .guess {
+                    /*display: inline;*/
+                    border: solid 2px;
+                    border-radius: 10%;
+                    font-size: 6vw;
+
+                    padding: 0 2px;
+                    /* The guess boxes are sized to be large enough to render 100 without the width changing at 6vw */
+                    width: 12.3551vw;
+                    height: 12.3551vw;
+                    max-width: 135px;
+                    max-height: 135px;
+
+                    margin: 0 2px;
+                }
+
+                @media (min-width: 1095px) {
+                    .guess {
+                        font-size: 65px;
+                    }
+                }
+
+        #menu-section {
+            flex: 0 0 auto;
+        }
+    footer {
+        /*Flex Element in body Flexbox*/
+        flex: 1 1 auto;
+
+
+        /*Absolutely positiion 100px tall footer with Fullstack logo and my name*/
+        /*position: fixed;*/
+        /*bottom: 0;
+        max-height: 73px;
+        width: 100%;*/
+
+
+        border-top: solid 2px;
+        /* Use flexbox to make image and name flow responsively */
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+        /*This currently only affects the Fullstack logo SVG. This may need to be changed to accomodate the footer flexbox layout*/
+        #footer-logo {
+            width: 40vw;
+            max-width: 250px;
+        }
+
+        /*These media queries resize my name in the footer*/
+        #footer-name {
+            font-size: 12pt;
+            /*flex-grow: 0;*/
+            /*display: inline;*/
+            /*margin: 0 0;*/
+            /*vertical-align: center;*/
+        }
+
+        @media (min-width: 360px) {
+            #footer-name {
+                font-size: 16pt;
+            }
+        }
+
+        @media (min-width: 564px) {
+            #footer-name {
+                font-size: 24pt;
+            }
+        }
+
+        @media (min-width: 867px) {
+            #footer-name {
+                font-size: 36pt;
+            }
+        }
+
+
+
+
+
+
+
+
+
 
 /* Class Selectors */
 
-.vert-center {
-    position: relative;
-    top: 50%;
-    /*transform: translateY(-50%);*/
-}
 
-.center {
-    text-align: center;
-}
-
-.guess {
-    display: inline;
-    border: solid 2px red;
-    border-radius: 10%;
-    font-size: 6vw;
-    padding: 0 5px;
-    background-color: black;
-    width: 20%;
-    max-width: 200px;
-    height: 20vw;
-    max-height: 200px;
-}
-
-/*@media (min-width: 800px) {
-    .guess {
-        font-size: 36pt;
-    }
-}*/
-
-.footer-row {
-    height: 100%;
-}
-
-.center {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.btn {
-    border: solid 2px red;
-    background-color: black;
-    color: red;
-}
 
 /* ID Selectors */
 
-#guess-list {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#input-parent {
-    /*height: 160px;
-    width: 160px;*/
-    /*margin: 5% auto 50px;*/
-    float: none;
-    margin: 0 auto;
-    position: relative;
-    height: 80vw;
-    max-height: 400px;
-    width: 80%;
-    max-width: 400px;
-}
-
-#players-input {
-    border: solid 2px red;
-    border-radius: 50%;
-    /*height: 160px;
-    width: 160px;*/
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    left: 0px;
-    text-align: center;
-    font-size: 8em;
-    background-color: black;
-    color: red;
 
 
 
-}
-#submit {
-    border: solid 6px red;
-    border-radius: 90%;
-    /*height: 60px;
-    width: 60px;*/
-    height: 38%;
-    width: 38%;
-    position: absolute;
-    /*top: 100px;
-    left: 100px;*/
-    top: 62%;
-    left: 62%;
-    background-color: black;
-    color: red;
-}
 
-/* Override the default color used in the placeholder text for a text input */
 
-::-webkit-input-placeholder {
-   color: red;
-}
 
-:-moz-placeholder { /* Firefox 18- */
-   color: red;
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-   color: red;
-}
-
-:-ms-input-placeholder {
-   color: red;
-}

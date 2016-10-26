@@ -43,13 +43,13 @@ ______________________________________________________________________________
 /*Styling has been refactored to follow the order of the HTML to better reason about flexbox*/
 
 body {
+    height: 100%;
+
     /*Flexbox containing header, main, and footer*/
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    height: 100%;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    /*align-items: center;*/
 }
 
     header {
@@ -72,17 +72,20 @@ body {
     main {
         /*Flex Element in body Flexbox*/
         flex: 1 1 auto;
+        overflow-y: scroll;
+
         /*Flexbox containing input-section, guess-section, and menu-section*/
         display: flex;
-        flex-direction: column;
+        flex-flow: column nowrap;
         justify-content: space-around;
         align-items: center;
     }
 
         #input-section {
             /* Set to relative to contain the absolute child elements */
+            margin-top: 5px;
             position: relative;
-            flex: 0 1 250px;
+            flex: 0 0 250px;
             width: 250px;
         }
 
@@ -111,11 +114,8 @@ body {
                 /* Round border of 6px */
                 border: solid 6px;
                 border-radius: 50%;
+                font-size: 2em;
             }
-
-
-            /* TODO: Create breakpoints targeting the flex and width of #input section and the fontsize of #players-input and the fontsize of #submit*/
-
 
         #guess-section {
             flex: 0 0 auto;
@@ -123,38 +123,33 @@ body {
 
             #guess-list {
                 display: flex;
-                flex-direction: row;
+                flex-flow: row nowrap;
                 justify-content: center;
                 align-items: center;
+
                 list-style: none;
                 padding: 0; /* For some reason, this is needed to maintain alignment*/
             }
 
                 .guess {
-                    flex: 0 1 auto;
-                    /*display: inline;*/
+                    flex: 0 0 48px;
+                    height: 48px;
                     border: solid 2px;
                     border-radius: 10%;
-                    font-size: 6vw;
+                    font-size: 16pt;
 
                     padding: 0 2px;
-                    /* The guess boxes are sized to be large enough to render 100 without the width changing at 6vw */
-                    /*width: 12.3551vw;
-                    height: 12.3551vw;
-                    max-width: 135px;
-                    max-height: 135px;*/
-
                     margin: 0 2px;
                 }
 
-                @media (min-width: 1095px) {
-                    .guess {
-                        font-size: 65px;
-                    }
-                }
-
         #menu-section {
-            flex: 0 0 auto;
+            flex: 1 0 auto;
+        }
+
+        #reset, #hint {
+            width: 70px;
+            height: 40px;
+            font-size: 16pt;
         }
 
         #reset {
@@ -162,7 +157,7 @@ body {
         }
     footer {
         /*Flex Element in body Flexbox*/
-        flex: 0 0 73px;
+        flex: 0 0 auto;
 
         border-top: solid 2px;
         width: 100%;
@@ -191,20 +186,128 @@ body {
             margin: 0 0;
         }
 
-        @media (min-width: 360px) {
-            #footer-name {
-                font-size: 16pt;
-            }
-        }
+/* Breakpoints */
 
-        @media (min-width: 564px) {
-            #footer-name {
-                font-size: 24pt;
-            }
-        }
+@media (min-width: 360px) {
+    #footer-name {
+        font-size: 16pt;
+    }
+}
 
-        @media (min-width: 867px) {
-            #footer-name {
-                font-size: 36pt;
-            }
-        }
+@media (min-width: 564px) {
+    #footer-name {
+        font-size: 24pt;
+    }
+}
+
+@media (min-width: 867px) {
+    #footer-name {
+        font-size: 36pt;
+    }
+}
+
+@media (min-width: 300px) {
+
+    #footer-name {font-size: 16pt;}
+}
+
+@media (min-width: 360px) {
+    #title {font-size: 2.4em;}
+    #subtitle {font-size: 1em;}
+    #footer-name {font-size: 20pt;}
+}
+
+@media (min-width: 433px) {
+    #footer-name {font-size: 24pt;}
+}
+
+@media (min-width: 564px) {
+    #footer-name {font-size: 30pt;}
+}
+
+
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-width : 768px) {
+/* Styles */
+
+    #input-section {
+        margin-top: 20px;
+        flex-basis: 400px;
+        width: 400px;
+    }
+
+    #players-input {
+        font-size: 12em;
+    }
+
+    #submit {
+        border: solid 9px;
+        font-size: 4em;
+    }
+
+    .guess {
+        flex: 0 0 100px;
+        height: 100px;
+        border: solid 2px;
+        border-radius: 10%;
+        font-size: 2.4em;
+
+        padding: 0 2px;
+        margin: 0 2px;
+    }
+
+    #footer-name {font-size: 36pt;}
+    #title {font-size: 2.8em;}
+    #subtitle {font-size: 1.2em;}
+
+    #reset, #hint {
+        font-size: 2.4em;
+        width: 120px;
+        height: 50px;
+    }
+
+}
+
+
+
+
+/* Desktops. Height shall not exceed 1080px*/
+@media only screen and (min-device-width : 1025px) {
+
+    #input-section {
+        margin-top: 20px;
+        flex-basis: 500px;
+        width: 500px;
+    }
+
+    #players-input {
+        font-size: 14em;
+    }
+
+    #submit {
+        border: solid 9px;
+        font-size: 5em;
+    }
+
+    .guess {
+        flex: 0 0 120px;
+        height: 120px;
+        border: solid 2px;
+        border-radius: 10%;
+        font-size: 2.8em;
+
+        padding: 0 2px;
+        margin: 0 2px;
+    }
+
+    #title {font-size: 3.2em;}
+    #subtitle {font-size: 1.4em;}
+
+        #reset, #hint {
+        font-size: 2.8em;
+        width: 140px;
+        height: 60px;
+    }
+
+}

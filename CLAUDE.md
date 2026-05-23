@@ -4,25 +4,23 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-A browser-based number guessing game styled after the Nintendo Virtual Boy (black background, red text, Orbitron font). No build system — open `index.html` directly in a browser to run the game.
+A browser-based number guessing game styled after the Nintendo Virtual Boy (black background, red text, Orbitron font).
+
+## Commands
+
+```sh
+npm install   # install dev dependencies (jasmine, serve)
+npm start     # serve the game at http://localhost:3000
+npm test      # run Jasmine specs headlessly in Node
+```
 
 ## Testing
 
-Tests use [Testem](https://github.com/testem/testem) with Jasmine 2. Testem must be installed globally:
+`npm test` runs `js/GuessingGame_spec.js` via Jasmine in Node. The setup helper (`spec/helpers/setup.js`) stubs `window` and jQuery so the game logic loads without a browser.
 
-```sh
-npm install -g testem
-testem        # runs tests in watch mode
-testem ci     # single run (CI mode)
-```
+`test.html` is a browser-based alternative runner (open via `npm start` then navigate to `/test.html`). It loads Jasmine 2.4.1 from CDN.
 
-`testem.json` loads all `js/**/*.js` files into the test runner. The spec file (`js/GuessingGame_spec.js`) is excluded from the production HTML via an HTML comment.
-
-### Known spec/implementation mismatches
-
-Two specs in `GuessingGame_spec.js` assert strings that differ from what `GuessingGame.js` actually returns:
-- Duplicate guess: spec expects `'You have already guessed that number.'`, implementation returns `'You already guessed ' + this.playersGuess`
-- Losing: spec expects `'You Lose.'`, implementation returns `'You Lose. Was ' + this.winningNumber`
+The spec file is excluded from the production `index.html` via an HTML comment.
 
 ## Architecture
 

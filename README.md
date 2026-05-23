@@ -1,3 +1,25 @@
 # Guessing Game
 
-A simple guessing game web application using a vector art style inspired by the Nintendo Virtual Boy
+A simple guessing game web application using a vector art style inspired by the Nintendo Virtual Boy.
+
+## Setup
+
+```sh
+npm install
+```
+
+## Running
+
+```sh
+npm start
+```
+
+Opens the game at http://localhost:3000.
+
+## Testing
+
+```sh
+npm test
+```
+
+Runs the Jasmine spec suite headlessly in Node.

@@ -97,6 +97,9 @@ describe("Game class", function() {
                 expect(function() {
                     game.playersGuessSubmission("not a number");
                 }).toThrow("That is an invalid guess.");
+                expect(function() {
+                    game.playersGuessSubmission(42.5);
+                }).toThrow("That is an invalid guess.");
             })
             it('calls checkGuess', function() {
                 spyOn(Game.prototype, 'checkGuess');

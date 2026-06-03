@@ -15,7 +15,7 @@ ______________________________________________________________________________
 /* FONTS AND COLORS*/
     @font-face { font-family: Orbitron; src: url('../fonts/orbitron-medium.otf'); }
     html {
-        box-sizing: 'border-box';
+        box-sizing: border-box;
         background-color: black;
         color: red;
         border-color: red;

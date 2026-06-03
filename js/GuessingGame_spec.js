@@ -30,7 +30,7 @@ describe("shuffle function", function() {
         var unshuffledArray = [20,50,70]
         var shuffledArray = shuffle(unshuffledArray);
         expect(shuffledArray.length).toEqual(3);
-        expect(shuffledArray === shuffledArray).toEqual(true);
+        expect(shuffledArray === unshuffledArray).toEqual(true);
     })
 });
 

@@ -140,7 +140,7 @@ $(document).ready(function () {
 
     $('#reset').click(function () {
         game = new Game();
-        $('#title').text('Guessing Game!');
+        $('#title').text('Vector Guess');
         $('#subtitle').text('Guess a number between 1-100!');
         for (var i = 0; i < 5; i++) {
             $('#guess-list li:nth-child(' + (i + 1) + ')').text("-");

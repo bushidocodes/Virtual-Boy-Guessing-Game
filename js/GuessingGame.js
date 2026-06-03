@@ -100,14 +100,11 @@ controller.enterPlayerGuess = function () {
         controller.guessOutput = game.playersGuessSubmission(controller.guessInput);
         // Render the results to screen
         $('#title').text(controller.guessOutput);
-        // alert(controller.guessOutput.slice(0,8));
         if (controller.guessOutput === "You Win!" || controller.guessOutput.slice(0,9) === 'You Lose.') {
             $('#subtitle').text('Click Reset to play again');
             $('#submit').attr("disabled", true);
             $('#hint').attr("disabled", true);
             $('#players-input').attr("disabled", true);
-            // $('#reset').focus();
-            // $('#players-input').off('keypress');
         } else {
             $('#subtitle').text(game.isLower() ? "Guess Higher" : "Guess Lower");
         }
@@ -149,11 +146,6 @@ $(document).ready(function () {
         $('#hint').attr("disabled", false);
         $('#players-input').attr("disabled", false);
         $('#players-input').focus();
-        // $('#players-input').keypress(function (event) {
-        //     if (event.which === 13) {
-        //         controller.enterPlayerGuess();
-        //     }
-        // });
     });
 
     $('#hint').click(function () {

@@ -188,41 +188,22 @@ body {
 
 /* Breakpoints */
 
-@media (min-width: 360px) {
-    #footer-name {
-        font-size: 16pt;
-    }
-}
-
-@media (min-width: 564px) {
-    #footer-name {
-        font-size: 24pt;
-    }
-}
-
-@media (min-width: 867px) {
-    #footer-name {
-        font-size: 36pt;
-    }
-}
-
 @media (min-width: 300px) {
-
-    #footer-name {font-size: 16pt;}
+    #footer-name { font-size: 16pt; }
 }
 
 @media (min-width: 360px) {
-    #title {font-size: 2.4em;}
-    #subtitle {font-size: 1em;}
-    #footer-name {font-size: 20pt;}
+    #title { font-size: 2.4em; }
+    #subtitle { font-size: 1em; }
+    #footer-name { font-size: 20pt; }
 }
 
 @media (min-width: 433px) {
-    #footer-name {font-size: 24pt;}
+    #footer-name { font-size: 24pt; }
 }
 
 @media (min-width: 564px) {
-    #footer-name {font-size: 30pt;}
+    #footer-name { font-size: 30pt; }
 }
 
 

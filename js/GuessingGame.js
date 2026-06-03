@@ -61,7 +61,6 @@ Game.prototype.checkGuess = function () {
         this.pastGuesses.push(this.playersGuess);
         return 'You Win!';
     } else if (this.pastGuesses.indexOf(this.playersGuess) > -1) {
-        console.log("Aready guess: " + this.pastGuesses.indexOf(this.playersGuess));
         return 'You have already guessed that number.';
     } else {
         this.pastGuesses.push(this.playersGuess);

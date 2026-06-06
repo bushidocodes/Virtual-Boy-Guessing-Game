@@ -8,178 +8,160 @@ ______________________________________________________________________________
 |    \\//\\//       //\\   //  //\\  ||\\  ||^^   /\  /\  \\  //              |
 |      \\//        ||__|| ||  ||__|| || || ||==  //\\//\\   ||                |
 |                  ||``||  \\ ||``|| ||//  ||,, //  \/  \\  ||                |
-```````````````````````````````````````````````````````````````````````````````
+`````````````````````````````````````````````````````````````````````````````
 */
 
+/* FONTS AND COLORS */
 
-/* FONTS AND COLORS*/
-    @font-face { font-family: Orbitron; src: url('../fonts/orbitron-medium.otf'); }
-    html {
-        box-sizing: border-box;
-        background-color: black;
-        color: red;
-        border-color: red;
-        font-family: Orbitron, sans-serif;
-        text-align: center;
-        height: 100%;
-    }
-    input {
-        border-color: red;
-        background-color: black;
-        color: red;
-    }
-    button {
-        border: solid 2px;
-        background-color: black;
-        color: red;
-    }
-    ::-webkit-input-placeholder { color: red; }
-    ::placeholder { color: red; }
+@font-face { font-family: Orbitron; src: url('../fonts/orbitron-medium.otf'); }
+
+html {
+    box-sizing: border-box;
+    background-color: black;
+    color: red;
+    border-color: red;
+    font-family: Orbitron, sans-serif;
+    text-align: center;
+    height: 100%;
+}
+
+input {
+    border-color: red;
+    background-color: black;
+    color: red;
+}
+
+button {
+    border: solid 2px;
+    background-color: black;
+    color: red;
+}
+
+::-webkit-input-placeholder { color: red; }
+::placeholder { color: red; }
 
 /* LAYOUT AND ALIGNMENT */
 
 body {
     height: 100%;
-
-    /*Flexbox containing header, main, and footer*/
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
 }
 
-    header {
-        /*Flex Element in body Flexbox*/
-        flex: 0 0 auto;
+header {
+    flex: 0 0 auto;
+    border-bottom: solid 2px;
+    width: 100%;
+}
 
-        border-bottom: solid 2px;
-        width: 100%;
-    }
+#title {
+    font-size: 2.4em;
+    margin: 0 0;
+}
 
-        #title {
-            font-size: 2.4em;
-            margin: 0 0;
-        }
-        #subtitle {
-            font-size: 1em;
-            margin: 0 0;
-        }
+#subtitle {
+    font-size: 1em;
+    margin: 0 0;
+}
 
-    main {
-        /*Flex Element in body Flexbox*/
-        flex: 1 1 auto;
-        overflow-y: scroll;
+main {
+    flex: 1 1 auto;
+    overflow-y: scroll;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
 
-        /*Flexbox containing input-section, guess-section, and menu-section*/
-        display: flex;
-        flex-flow: column nowrap;
-        justify-content: space-around;
-        align-items: center;
-    }
+#input-section {
+    margin-top: 5px;
+    position: relative;
+    flex: 0 0 250px;
+    width: 250px;
+}
 
-        #input-section {
-            /* Set to relative to contain the absolute child elements */
-            margin-top: 5px;
-            position: relative;
-            flex: 0 0 250px;
-            width: 250px;
-        }
+#players-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    border: solid 2px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 8em;
+}
 
-            #players-input {
-                /* Fill the #input-parent container */
-                position: absolute;
-                left: 0px;
-                top: 0px;
-                height: 100%;
-                width: 100%;
-                /*Round border of 2px */
-                border: solid 2px;
-                border-radius: 50%;
-                /* Center input text and placeholder and set font-size to 8em*/
-                text-align: center;
-                font-size: 8em;
-            }
+#submit {
+    position: absolute;
+    top: 62%;
+    left: 62%;
+    height: 38%;
+    width: 38%;
+    border: solid 6px;
+    border-radius: 50%;
+    font-size: 2em;
+}
 
-            #submit {
-                /* Position element 62% over and down in #input-parent and size to fill 38% of #input-parent*/
-                position: absolute;
-                top: 62%;
-                left: 62%;
-                height: 38%;
-                width: 38%;
-                /* Round border of 6px */
-                border: solid 6px;
-                border-radius: 50%;
-                font-size: 2em;
-            }
+#guess-section {
+    flex: 0 0 auto;
+}
 
-        #guess-section {
-            flex: 0 0 auto;
-        }
+#guess-list {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0; /* needed to maintain alignment */
+}
 
-            #guess-list {
-                display: flex;
-                flex-flow: row nowrap;
-                justify-content: center;
-                align-items: center;
+.guess {
+    flex: 0 0 48px;
+    height: 48px;
+    border: solid 2px;
+    border-radius: 10%;
+    font-size: 16pt;
+    padding: 0 2px;
+    margin: 0 2px;
+}
 
-                list-style: none;
-                padding: 0; /* For some reason, this is needed to maintain alignment*/
-            }
+#menu-section {
+    flex: 1 0 auto;
+}
 
-                .guess {
-                    flex: 0 0 48px;
-                    height: 48px;
-                    border: solid 2px;
-                    border-radius: 10%;
-                    font-size: 16pt;
+#reset, #hint {
+    width: 70px;
+    height: 40px;
+    font-size: 16pt;
+}
 
-                    padding: 0 2px;
-                    margin: 0 2px;
-                }
+#reset {
+    margin-right: 5px;
+}
 
-        #menu-section {
-            flex: 1 0 auto;
-        }
+footer {
+    flex: 0 0 auto;
+    border-top: solid 2px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
 
-        #reset, #hint {
-            width: 70px;
-            height: 40px;
-            font-size: 16pt;
-        }
+#footer-logo {
+    flex: 0 1 auto;
+    width: 40vw;
+    max-width: 280px;
+}
 
-        #reset {
-            margin-right: 5px;
-        }
-    footer {
-        /*Flex Element in body Flexbox*/
-        flex: 0 0 auto;
-
-        border-top: solid 2px;
-        width: 100%;
-
-        /* Use flexbox to make image and name flow responsively */
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-    }
-        /*This currently only affects the Fullstack logo SVG. This may need to be changed to accomodate the footer flexbox layout*/
-        #footer-logo {
-            /*Flex Element in footer Flexbox*/
-            flex: 0 1 auto;
-
-            width: 40vw;
-            max-width: 280px;
-        }
-
-        /*These media queries resize my name in the footer*/
-        #footer-name {
-            /*Flex Element in footer Flexbox*/
-            flex: 0 0 auto;
-            /*Override default h4*/
-            font-size: 12pt;
-            margin: 0 0;
-        }
+#footer-name {
+    flex: 0 0 auto;
+    font-size: 12pt;
+    margin: 0 0;
+}
 
 /* Breakpoints */
 
@@ -201,11 +183,8 @@ body {
     #footer-name { font-size: 30pt; }
 }
 
-
-
-/* iPads (portrait) ----------- */
-@media only screen and (min-width : 768px) {
-/* Styles */
+/* Tablet */
+@media (min-width: 768px) {
 
     #input-section {
         margin-top: 20px;
@@ -228,14 +207,13 @@ body {
         border: solid 2px;
         border-radius: 10%;
         font-size: 2.4em;
-
         padding: 0 2px;
         margin: 0 2px;
     }
 
-    #footer-name {font-size: 36pt;}
-    #title {font-size: 2.8em;}
-    #subtitle {font-size: 1.2em;}
+    #footer-name { font-size: 36pt; }
+    #title { font-size: 2.8em; }
+    #subtitle { font-size: 1.2em; }
 
     #reset, #hint {
         font-size: 2.4em;
@@ -245,11 +223,8 @@ body {
 
 }
 
-
-
-
-/* Desktops. Height shall not exceed 1080px*/
-@media only screen and (min-width : 1025px) {
+/* Desktop */
+@media (min-width: 1025px) {
 
     #input-section {
         margin-top: 20px;
@@ -272,15 +247,14 @@ body {
         border: solid 2px;
         border-radius: 10%;
         font-size: 2.8em;
-
         padding: 0 2px;
         margin: 0 2px;
     }
 
-    #title {font-size: 3.2em;}
-    #subtitle {font-size: 1.4em;}
+    #title { font-size: 3.2em; }
+    #subtitle { font-size: 1.4em; }
 
-        #reset, #hint {
+    #reset, #hint {
         font-size: 2.8em;
         width: 140px;
         height: 60px;

@@ -107,7 +107,7 @@ controller.enterPlayerGuess = function () {
     }
 };
 
-$(document).ready(function () {
+$(function () {
     game = new Game();
     $('#submit').click(controller.enterPlayerGuess);
     $('#players-input').on('keydown', function (event) {

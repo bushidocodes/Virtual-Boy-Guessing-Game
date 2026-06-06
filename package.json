@@ -2,13 +2,10 @@
   "name": "virtual-boy-guessing-game",
   "version": "1.0.0",
   "description": "A simple guessing game web application using a vector art style inspired by the Nintendo Virtual Boy",
-  "main": "index.js",
   "scripts": {
     "start": "serve .",
     "test": "jasmine --config=spec/support/jasmine.json"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {

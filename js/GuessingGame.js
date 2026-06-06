@@ -40,11 +40,7 @@ Game.prototype.difference = function () {
 };
 
 Game.prototype.isLower = function () {
-    if (this.playersGuess < this.winningNumber) {
-        return true;
-    } else {
-        return false;
-    }
+    return this.playersGuess < this.winningNumber;
 };
 
 Game.prototype.playersGuessSubmission = function (guess) {
@@ -85,16 +81,12 @@ Game.prototype.provideHint = function () {
 
 const controller = {};
 controller.enterPlayerGuess = function () {
-    // Save player's guess and clear UI
     controller.guessInput = parseInt($('#players-input').val(), 10);
     $('#players-input').val("");
     $('#players-input').focus();
 
-
     try {
-        // Submit the player's guess, save the result
         controller.guessOutput = game.playersGuessSubmission(controller.guessInput);
-        // Render the results to screen
         $('#title').text(controller.guessOutput);
         if (controller.guessOutput === "You Win!" || controller.guessOutput.slice(0,9) === 'You Lose.') {
             $('#subtitle').text('Click Reset to play again');
@@ -114,12 +106,8 @@ controller.enterPlayerGuess = function () {
             $('#subtitle').text(game.isLower() ? "Guess Higher than " + game.pastGuesses[game.pastGuesses.length - 1] : "Guess Lower than " + game.pastGuesses[game.pastGuesses.length - 1]);
         }
     } finally {
-
         delete controller.guessOutput;
     }
-
-
-
 };
 
 $(document).ready(function () {

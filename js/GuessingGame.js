@@ -9,7 +9,6 @@
 // |                  ||``||  \\ ||``|| ||//  ||,, //  \/  \\  ||                |
 // ```````````````````````````````````````````````````````````````````````````````
 
-
 let game;
 
 function generateWinningNumber() {
@@ -19,10 +18,9 @@ function generateWinningNumber() {
 // Implements Fisher-Yates Algorithm
 // https://www.frankmitchell.org/2015/01/fisher-yates/
 function shuffle(arr) {
-    let i, j, temp;
-    for (i = arr.length - 1; i > 0; i -= 1) {
-        j = Math.floor(Math.random() * (i + 1));
-        temp = arr[i];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
@@ -88,7 +86,7 @@ controller.enterPlayerGuess = function () {
     try {
         controller.guessOutput = game.playersGuessSubmission(controller.guessInput);
         $('#title').text(controller.guessOutput);
-        if (controller.guessOutput === "You Win!" || controller.guessOutput.slice(0,9) === 'You Lose.') {
+        if (controller.guessOutput === "You Win!" || controller.guessOutput.startsWith('You Lose.')) {
             $('#subtitle').text('Click Reset to play again');
             $('#submit').attr("disabled", true);
             $('#hint').attr("disabled", true);

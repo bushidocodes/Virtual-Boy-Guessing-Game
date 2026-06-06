@@ -10,7 +10,7 @@
 // ```````````````````````````````````````````````````````````````````````````````
 
 
-var game, controller;
+let game;
 
 function generateWinningNumber() {
     return Math.floor(Math.random() * 100 + 1);
@@ -19,7 +19,7 @@ function generateWinningNumber() {
 // Implements Fisher-Yates Algorithm
 // https://www.frankmitchell.org/2015/01/fisher-yates/
 function shuffle(arr) {
-    var i = 0, j = 0, temp = 0;
+    let i, j, temp;
     for (i = arr.length - 1; i > 0; i -= 1) {
         j = Math.floor(Math.random() * (i + 1));
         temp = arr[i];
@@ -86,7 +86,7 @@ Game.prototype.provideHint = function () {
     return shuffle([this.winningNumber, generateWinningNumber(), generateWinningNumber()]);
 };
 
-controller = {};
+const controller = {};
 controller.enterPlayerGuess = function () {
     // Save player's guess and clear UI
     controller.guessInput = parseInt($('#players-input').val(), 10);
@@ -107,7 +107,7 @@ controller.enterPlayerGuess = function () {
         } else {
             $('#subtitle').text(game.isLower() ? "Guess Higher" : "Guess Lower");
         }
-        for (var i = 0; i < game.pastGuesses.length; i++) {
+        for (let i = 0; i < game.pastGuesses.length; i++) {
             $('#guess-list li:nth-child(' + (i + 1) + ')').text(game.pastGuesses[i]);
         }
         delete controller.guessInput;
@@ -138,7 +138,7 @@ $(document).ready(function () {
         game = new Game();
         $('#title').text('Vector Guess');
         $('#subtitle').text('Guess a number between 1-100!');
-        for (var i = 0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
             $('#guess-list li:nth-child(' + (i + 1) + ')').text("-");
         }
         $('#submit').attr("disabled", false);

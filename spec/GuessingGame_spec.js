@@ -35,7 +35,7 @@ describe("Game class", function() {
         game = new Game();
     });
 
-    it('should have a playersGuess property, and a pastGuesses property ', function() {
+    it('should have a playersGuess property, and a pastGuesses property', function() {
         expect(game.playersGuess).toEqual(null);
         expect(Array.isArray(game.pastGuesses)).toEqual(true);
         expect(game.pastGuesses.length).toEqual(0);
@@ -116,7 +116,7 @@ describe("Game class", function() {
             it('if playersGuess isn\'t the winningNumber or a duplicate, add it to pastGuesses', function() {
                 game.winningNumber = 42;
                 game.playersGuessSubmission(36);
-                expect(game.pastGuesses.indexOf(36)).toBeGreaterThan(-1);
+                expect(game.pastGuesses).toContain(36);
             });
             it('returns "You Lose" if this is the players 5th guess', function() {
                 game.winningNumber = 42;
@@ -161,7 +161,7 @@ describe("Game class", function() {
             });
             it('includes the winningNumber', function() {
                 const hintArray = game.provideHint();
-                expect(hintArray.indexOf(game.winningNumber)).toBeGreaterThan(-1);
+                expect(hintArray).toContain(game.winningNumber);
             });
             it('calls generateWinningNumber to fill the rest of the hint array with random numbers', function() {
                 spyOn(window, 'generateWinningNumber');

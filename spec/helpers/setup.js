@@ -5,12 +5,12 @@ const path = require('path');
 global.window = global;
 global.document = {};
 
-// Minimal jQuery stub — only enough to prevent the $(document).ready() call
+// Minimal jQuery stub — only enough to prevent the $(fn) ready call
 // from crashing; the controller layer is not under test
 const noop = () => stub;
 const stub = {
-  click: noop, keypress: noop, val: () => '', text: noop,
-  attr: noop, focus: noop, ready: noop,
+  click: noop, on: noop, val: () => '', text: noop,
+  attr: noop, prop: noop, focus: noop, ready: noop,
 };
 global.$ = () => stub;
 

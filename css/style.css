@@ -33,14 +33,10 @@ ______________________________________________________________________________
         background-color: black;
         color: red;
     }
-    /* CSS Hack: Override the default color used in the placeholder text for a text input */
-    ::-webkit-input-placeholder {color: red;}
-    :-moz-placeholder {color: red;} /* Firefox 18- */
-    ::-moz-placeholder {color: red;}/* Firefox 19+ */
-    :-ms-input-placeholder {color: red;}
+    ::-webkit-input-placeholder { color: red; }
+    ::placeholder { color: red; }
 
 /* LAYOUT AND ALIGNMENT */
-/*Styling has been refactored to follow the order of the HTML to better reason about flexbox*/
 
 body {
     height: 100%;
@@ -49,7 +45,6 @@ body {
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
-    /*align-items: center;*/
 }
 
     header {

@@ -53,23 +53,23 @@ Game.prototype.checkGuess = function () {
     if (this.playersGuess === this.winningNumber) {
         this.pastGuesses.push(this.playersGuess);
         return 'You Win!';
-    } else if (this.pastGuesses.includes(this.playersGuess)) {
+    }
+    if (this.pastGuesses.includes(this.playersGuess)) {
         return 'You have already guessed that number.';
+    }
+    this.pastGuesses.push(this.playersGuess);
+    if (this.pastGuesses.length >= 5) {
+        return `You Lose. Was ${this.winningNumber}`;
+    }
+    const diff = this.difference();
+    if (diff < 10) {
+        return "You're burning up!";
+    } else if (diff < 25) {
+        return "You're lukewarm.";
+    } else if (diff < 50) {
+        return "You're a bit chilly.";
     } else {
-        this.pastGuesses.push(this.playersGuess);
-        if (this.pastGuesses.length >= 5) {
-            return `You Lose. Was ${this.winningNumber}`;
-        }
-        const diff = this.difference();
-        if (diff < 10) {
-            return "You're burning up!";
-        } else if (diff < 25) {
-            return "You're lukewarm.";
-        } else if (diff < 50) {
-            return "You're a bit chilly.";
-        } else {
-            return "You're ice cold!";
-        }
+        return "You're ice cold!";
     }
 };
 
@@ -79,14 +79,14 @@ Game.prototype.provideHint = function () {
 
 const controller = {};
 controller.enterPlayerGuess = function () {
-    controller.guessInput = parseInt($('#players-input').val(), 10);
+    const guess = parseInt($('#players-input').val(), 10);
     $('#players-input').val("");
     $('#players-input').focus();
 
     try {
-        controller.guessOutput = game.playersGuessSubmission(controller.guessInput);
-        $('#title').text(controller.guessOutput);
-        if (controller.guessOutput === "You Win!" || controller.guessOutput.startsWith('You Lose.')) {
+        const result = game.playersGuessSubmission(guess);
+        $('#title').text(result);
+        if (result === "You Win!" || result.startsWith('You Lose.')) {
             $('#subtitle').text('Click Reset to play again');
             $('#submit').prop("disabled", true);
             $('#hint').prop("disabled", true);
@@ -97,7 +97,6 @@ controller.enterPlayerGuess = function () {
         for (let i = 0; i < game.pastGuesses.length; i++) {
             $(`#guess-list li:nth-child(${i + 1})`).text(game.pastGuesses[i]);
         }
-        delete controller.guessInput;
     } catch (err) {
         $('#title').text(err);
         if (game.pastGuesses.length > 0) {
@@ -105,8 +104,6 @@ controller.enterPlayerGuess = function () {
             const direction = game.isLower() ? "Higher" : "Lower";
             $('#subtitle').text(`Guess ${direction} than ${lastGuess}`);
         }
-    } finally {
-        delete controller.guessOutput;
     }
 };
 
@@ -133,7 +130,7 @@ $(document).ready(function () {
     });
 
     $('#hint').click(function () {
-        $('#title').text(game.provideHint().join("? ") + "?");
+        $('#title').text(`${game.provideHint().join("? ")}?`);
         $('#hint').prop("disabled", true);
         $('#players-input').focus();
     });

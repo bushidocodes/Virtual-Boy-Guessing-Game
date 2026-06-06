@@ -14,6 +14,8 @@ const stub = {
 };
 global.$ = () => stub;
 
-// Load source into global scope (indirect eval promotes function declarations to global)
+// Load source into global scope. Function declarations (generateWinningNumber, shuffle)
+// are promoted to the global object automatically. class Game is not, so append an
+// explicit globalThis assignment so spies can target it via window.Game.
 const src = fs.readFileSync(path.resolve(__dirname, '../../js/GuessingGame.js'), 'utf8');
-(0, eval)(src);
+(0, eval)(src + '\nglobalThis.Game = Game;');

@@ -69,14 +69,11 @@ Game.prototype.checkGuess = function () {
         }
         if (Math.abs(this.playersGuess - this.winningNumber) < 10) {
             return "You're burning up!";
-        }
-        if (Math.abs(this.playersGuess - this.winningNumber) < 25) {
+        } else if (Math.abs(this.playersGuess - this.winningNumber) < 25) {
             return "You're lukewarm.";
-        }
-        if (Math.abs(this.playersGuess - this.winningNumber) < 50) {
+        } else if (Math.abs(this.playersGuess - this.winningNumber) < 50) {
             return "You're a bit chilly.";
-        }
-        if (Math.abs(this.playersGuess - this.winningNumber) < 100) {
+        } else {
             return "You're ice cold!";
         }
     }

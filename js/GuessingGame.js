@@ -53,7 +53,7 @@ Game.prototype.checkGuess = function () {
     if (this.playersGuess === this.winningNumber) {
         this.pastGuesses.push(this.playersGuess);
         return 'You Win!';
-    } else if (this.pastGuesses.indexOf(this.playersGuess) > -1) {
+    } else if (this.pastGuesses.includes(this.playersGuess)) {
         return 'You have already guessed that number.';
     } else {
         this.pastGuesses.push(this.playersGuess);
@@ -101,7 +101,9 @@ controller.enterPlayerGuess = function () {
     } catch (err) {
         $('#title').text(err);
         if (game.pastGuesses.length > 0) {
-            $('#subtitle').text(game.isLower() ? "Guess Higher than " + game.pastGuesses[game.pastGuesses.length - 1] : "Guess Lower than " + game.pastGuesses[game.pastGuesses.length - 1]);
+            const lastGuess = game.pastGuesses.at(-1);
+            const direction = game.isLower() ? "Higher" : "Lower";
+            $('#subtitle').text(`Guess ${direction} than ${lastGuess}`);
         }
     } finally {
         delete controller.guessOutput;
@@ -132,7 +134,7 @@ $(document).ready(function () {
 
     $('#hint').click(function () {
         $('#title').text(game.provideHint().join("? ") + "?");
-        $('#hint').attr("disabled", true);
+        $('#hint').prop("disabled", true);
         $('#players-input').focus();
     });
 });

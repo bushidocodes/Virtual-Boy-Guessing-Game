@@ -45,9 +45,8 @@ Game.prototype.playersGuessSubmission = function (guess) {
     if (typeof guess === 'number' && Number.isInteger(guess) && guess >= 1 && guess <= 100) {
         this.playersGuess = guess;
         return this.checkGuess();
-    } else {
-        throw 'That is an invalid guess.';
     }
+    throw 'That is an invalid guess.';
 };
 
 Game.prototype.checkGuess = function () {
@@ -59,13 +58,14 @@ Game.prototype.checkGuess = function () {
     } else {
         this.pastGuesses.push(this.playersGuess);
         if (this.pastGuesses.length >= 5) {
-            return 'You Lose. Was ' + this.winningNumber;
+            return `You Lose. Was ${this.winningNumber}`;
         }
-        if (Math.abs(this.playersGuess - this.winningNumber) < 10) {
+        const diff = this.difference();
+        if (diff < 10) {
             return "You're burning up!";
-        } else if (Math.abs(this.playersGuess - this.winningNumber) < 25) {
+        } else if (diff < 25) {
             return "You're lukewarm.";
-        } else if (Math.abs(this.playersGuess - this.winningNumber) < 50) {
+        } else if (diff < 50) {
             return "You're a bit chilly.";
         } else {
             return "You're ice cold!";
@@ -88,14 +88,14 @@ controller.enterPlayerGuess = function () {
         $('#title').text(controller.guessOutput);
         if (controller.guessOutput === "You Win!" || controller.guessOutput.startsWith('You Lose.')) {
             $('#subtitle').text('Click Reset to play again');
-            $('#submit').attr("disabled", true);
-            $('#hint').attr("disabled", true);
-            $('#players-input').attr("disabled", true);
+            $('#submit').prop("disabled", true);
+            $('#hint').prop("disabled", true);
+            $('#players-input').prop("disabled", true);
         } else {
             $('#subtitle').text(game.isLower() ? "Guess Higher" : "Guess Lower");
         }
         for (let i = 0; i < game.pastGuesses.length; i++) {
-            $('#guess-list li:nth-child(' + (i + 1) + ')').text(game.pastGuesses[i]);
+            $(`#guess-list li:nth-child(${i + 1})`).text(game.pastGuesses[i]);
         }
         delete controller.guessInput;
     } catch (err) {
@@ -122,11 +122,11 @@ $(document).ready(function () {
         $('#title').text('Vector Guess');
         $('#subtitle').text('Guess a number between 1-100!');
         for (let i = 0; i < 5; i++) {
-            $('#guess-list li:nth-child(' + (i + 1) + ')').text("-");
+            $(`#guess-list li:nth-child(${i + 1})`).text("-");
         }
-        $('#submit').attr("disabled", false);
-        $('#hint').attr("disabled", false);
-        $('#players-input').attr("disabled", false);
+        $('#submit').prop("disabled", false);
+        $('#hint').prop("disabled", false);
+        $('#players-input').prop("disabled", false);
         $('#players-input').focus();
     });
 

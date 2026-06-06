@@ -14,6 +14,6 @@ const stub = {
 };
 global.$ = () => stub;
 
-// Load source into global scope (indirect eval promotes var declarations to global)
+// Load source into global scope (indirect eval promotes function declarations to global)
 const src = fs.readFileSync(path.resolve(__dirname, '../../js/GuessingGame.js'), 'utf8');
 (0, eval)(src);

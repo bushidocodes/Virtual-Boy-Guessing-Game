@@ -47,7 +47,7 @@ class Game {
             this.playersGuess = guess;
             return this.checkGuess();
         }
-        throw 'That is an invalid guess.';
+        throw new Error('That is an invalid guess.');
     }
 
     checkGuess() {
@@ -79,30 +79,31 @@ class Game {
     }
 }
 
-const controller = {};
-controller.enterPlayerGuess = function () {
-    const guess = parseInt($('#players-input').val(), 10);
-    $('#players-input').val("");
-    $('#players-input').focus();
+const controller = {
+    enterPlayerGuess() {
+        const guess = parseInt($('#players-input').val(), 10);
+        $('#players-input').val("");
+        $('#players-input').focus();
 
-    try {
-        const result = game.playersGuessSubmission(guess);
-        $('#title').text(result);
-        if (result === "You Win!" || result.startsWith('You Lose.')) {
-            $('#subtitle').text('Click Reset to play again');
-            $('#submit, #hint, #players-input').prop("disabled", true);
-        } else {
-            $('#subtitle').text(game.isLower() ? "Guess Higher" : "Guess Lower");
-        }
-        game.pastGuesses.forEach((pastGuess, i) => {
-            $(`#guess-list li:nth-child(${i + 1})`).text(pastGuess);
-        });
-    } catch (err) {
-        $('#title').text(err);
-        if (game.pastGuesses.length > 0) {
-            const lastGuess = game.pastGuesses.at(-1);
-            const direction = game.isLower() ? "Higher" : "Lower";
-            $('#subtitle').text(`Guess ${direction} than ${lastGuess}`);
+        try {
+            const result = game.playersGuessSubmission(guess);
+            $('#title').text(result);
+            if (result === "You Win!" || result.startsWith('You Lose.')) {
+                $('#subtitle').text('Click Reset to play again');
+                $('#submit, #hint, #players-input').prop("disabled", true);
+            } else {
+                $('#subtitle').text(game.isLower() ? "Guess Higher" : "Guess Lower");
+            }
+            game.pastGuesses.forEach((pastGuess, i) => {
+                $(`#guess-list li:nth-child(${i + 1})`).text(pastGuess);
+            });
+        } catch (err) {
+            $('#title').text(err.message);
+            if (game.pastGuesses.length > 0) {
+                const lastGuess = game.pastGuesses.at(-1);
+                const direction = game.isLower() ? "Higher" : "Lower";
+                $('#subtitle').text(`Guess ${direction} than ${lastGuess}`);
+            }
         }
     }
 };

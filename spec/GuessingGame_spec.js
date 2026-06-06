@@ -34,29 +34,21 @@ describe("Game class", function() {
         game = new Game();
     });
 
-    it('should have a playersGuess property, and a pastGuesses property', function() {
+    it('initializes playersGuess to null and pastGuesses to []', function() {
         expect(game.playersGuess).toBeNull();
         expect(game.pastGuesses).toEqual([]);
     });
 
-    it('should have a winningNumber property, which calls generateWinningNumber', function() {
+    it('sets winningNumber by calling generateWinningNumber', function() {
         spyOn(window, 'generateWinningNumber').and.callThrough();
         game = new Game();
         expect(generateWinningNumber).toHaveBeenCalled();
         expect(typeof game.winningNumber).toBe('number');
     });
 
-    describe('Game constructor', function() {
-        it('initializes with empty state', function() {
-            const newGame = new Game();
-            expect(newGame.playersGuess).toBeNull();
-            expect(newGame.pastGuesses).toEqual([]);
-        });
-    });
+    describe("Game methods", function() {
 
-    describe("Game.prototype methods", function() {
-
-        describe('difference function', function() {
+        describe('difference method', function() {
             it('returns the absolute value of the difference between the playersGuess and winningNumber', function() {
                 game.playersGuess = 20;
                 game.winningNumber = 10;
@@ -66,7 +58,7 @@ describe("Game class", function() {
             });
         });
 
-        describe('isLower function', function() {
+        describe('isLower method', function() {
             it('returns true if the playersGuess is lower than winningNumber, and false if not.', function() {
                 game.playersGuess = 20;
                 game.winningNumber = 10;
@@ -76,7 +68,7 @@ describe("Game class", function() {
             });
         });
 
-        describe("playersGuessSubmission function", function() {
+        describe("playersGuessSubmission method", function() {
             it('takes a number as an argument and sets that as playersGuess', function() {
                 game.playersGuessSubmission(42);
                 expect(game.playersGuess).toBe(42);
@@ -84,19 +76,19 @@ describe("Game class", function() {
             it('throws an error if the number is invalid (less than 1, greater than 100, or not a number)', function() {
                 expect(function() {
                     game.playersGuessSubmission(0);
-                }).toThrow("That is an invalid guess.");
+                }).toThrowError('That is an invalid guess.');
                 expect(function() {
                     game.playersGuessSubmission(-1);
-                }).toThrow("That is an invalid guess.");
+                }).toThrowError('That is an invalid guess.');
                 expect(function() {
                     game.playersGuessSubmission(101);
-                }).toThrow("That is an invalid guess.");
+                }).toThrowError('That is an invalid guess.');
                 expect(function() {
                     game.playersGuessSubmission("not a number");
-                }).toThrow("That is an invalid guess.");
+                }).toThrowError('That is an invalid guess.');
                 expect(function() {
                     game.playersGuessSubmission(42.5);
-                }).toThrow("That is an invalid guess.");
+                }).toThrowError('That is an invalid guess.');
             });
             it('calls checkGuess', function() {
                 spyOn(Game.prototype, 'checkGuess');
@@ -105,7 +97,7 @@ describe("Game class", function() {
             });
         });
 
-        describe("checkGuess function", function() {
+        describe("checkGuess method", function() {
             it('returns a string', function() {
                 const result = game.playersGuessSubmission(42);
                 expect(typeof result).toBe('string');
@@ -150,7 +142,7 @@ describe("Game class", function() {
             });
         });
 
-        describe("provideHint function", function() {
+        describe("provideHint method", function() {
             it('generates an array with a length of 3', function() {
                 const hintArray = game.provideHint();
                 expect(hintArray).toHaveSize(3);

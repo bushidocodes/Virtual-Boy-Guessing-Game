@@ -88,9 +88,7 @@ controller.enterPlayerGuess = function () {
         $('#title').text(result);
         if (result === "You Win!" || result.startsWith('You Lose.')) {
             $('#subtitle').text('Click Reset to play again');
-            $('#submit').prop("disabled", true);
-            $('#hint').prop("disabled", true);
-            $('#players-input').prop("disabled", true);
+            $('#submit, #hint, #players-input').prop("disabled", true);
         } else {
             $('#subtitle').text(game.isLower() ? "Guess Higher" : "Guess Lower");
         }
@@ -120,12 +118,8 @@ $(function () {
         game = new Game();
         $('#title').text('Vector Guess');
         $('#subtitle').text('Guess a number between 1-100!');
-        for (let i = 0; i < 5; i++) {
-            $(`#guess-list li:nth-child(${i + 1})`).text("-");
-        }
-        $('#submit').prop("disabled", false);
-        $('#hint').prop("disabled", false);
-        $('#players-input').prop("disabled", false);
+        $('#guess-list .guess').text('-');
+        $('#submit, #hint, #players-input').prop("disabled", false);
         $('#players-input').focus();
     });
 

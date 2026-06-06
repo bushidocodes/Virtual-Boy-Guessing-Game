@@ -46,6 +46,16 @@ describe("Game class", function() {
         expect(typeof game.winningNumber).toBe('number');
     });
 
+    describe('Game constructor', function() {
+        it('initializes with empty state', function() {
+            spyOn(window, 'Game').and.callThrough();
+            game = new Game();
+            expect(game.playersGuess).toBeNull();
+            expect(game.pastGuesses).toEqual([]);
+            expect(Game).toHaveBeenCalled();
+        });
+    });
+
     describe("Game.prototype methods", function() {
 
         describe('difference function', function() {
@@ -139,16 +149,6 @@ describe("Game class", function() {
             it(`returns "You're ice cold!" if the difference between playersGuess and winningGuess is less than 100`, function() {
                 game.winningNumber = 42;
                 expect(game.playersGuessSubmission(92)).toBe("You're ice cold!");
-            });
-        });
-
-        describe('Game constructor', function() {
-            it('initializes with empty state', function() {
-                spyOn(window, 'Game').and.callThrough();
-                game = new Game();
-                expect(game.playersGuess).toBeNull();
-                expect(game.pastGuesses).toEqual([]);
-                expect(Game).toHaveBeenCalled();
             });
         });
 

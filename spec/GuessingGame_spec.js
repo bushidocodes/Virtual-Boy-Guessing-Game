@@ -12,7 +12,7 @@ describe("generateWinningNumber function", function() {
 describe("shuffle function", function() {
     it('takes an array as an argument, and returns an array', function() {
         const shuffledArray = shuffle([20, 50, 70]);
-        expect(shuffledArray.length).toEqual(3);
+        expect(shuffledArray).toHaveSize(3);
     });
     it('shuffles an array using Math.random to place elements', function() {
         spyOn(Math, 'random').and.returnValue(0.5);
@@ -23,7 +23,6 @@ describe("shuffle function", function() {
     it('returns the array shuffled in place', function() {
         const unshuffledArray = [20, 50, 70];
         const shuffledArray = shuffle(unshuffledArray);
-        expect(shuffledArray.length).toEqual(3);
         expect(shuffledArray).toBe(unshuffledArray);
     });
 });
@@ -36,9 +35,8 @@ describe("Game class", function() {
     });
 
     it('should have a playersGuess property, and a pastGuesses property', function() {
-        expect(game.playersGuess).toEqual(null);
-        expect(Array.isArray(game.pastGuesses)).toEqual(true);
-        expect(game.pastGuesses.length).toEqual(0);
+        expect(game.playersGuess).toBeNull();
+        expect(game.pastGuesses).toEqual([]);
     });
 
     it('should have a winningNumber property, which calls generateWinningNumber', function() {
@@ -64,9 +62,9 @@ describe("Game class", function() {
             it('returns true if the playersGuess is lower than winningNumber, and false if not.', function() {
                 game.playersGuess = 20;
                 game.winningNumber = 10;
-                expect(game.isLower()).toEqual(false);
+                expect(game.isLower()).toBeFalse();
                 game.winningNumber = 30;
-                expect(game.isLower()).toEqual(true);
+                expect(game.isLower()).toBeTrue();
             });
         });
 
@@ -144,12 +142,12 @@ describe("Game class", function() {
             });
         });
 
-        describe('newGame function', function() {
-            it('returns an empty, new game instance', function() {
+        describe('Game constructor', function() {
+            it('initializes with empty state', function() {
                 spyOn(window, 'Game').and.callThrough();
                 game = new Game();
-                expect(game.playersGuess).toEqual(null);
-                expect(game.pastGuesses.length).toEqual(0);
+                expect(game.playersGuess).toBeNull();
+                expect(game.pastGuesses).toEqual([]);
                 expect(Game).toHaveBeenCalled();
             });
         });
@@ -157,7 +155,7 @@ describe("Game class", function() {
         describe("provideHint function", function() {
             it('generates an array with a length of 3', function() {
                 const hintArray = game.provideHint();
-                expect(hintArray.length).toEqual(3);
+                expect(hintArray).toHaveSize(3);
             });
             it('includes the winningNumber', function() {
                 const hintArray = game.provideHint();

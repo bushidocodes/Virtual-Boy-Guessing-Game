@@ -94,9 +94,9 @@ controller.enterPlayerGuess = function () {
         } else {
             $('#subtitle').text(game.isLower() ? "Guess Higher" : "Guess Lower");
         }
-        for (let i = 0; i < game.pastGuesses.length; i++) {
-            $(`#guess-list li:nth-child(${i + 1})`).text(game.pastGuesses[i]);
-        }
+        game.pastGuesses.forEach((guess, i) => {
+            $(`#guess-list li:nth-child(${i + 1})`).text(guess);
+        });
     } catch (err) {
         $('#title').text(err);
         if (game.pastGuesses.length > 0) {

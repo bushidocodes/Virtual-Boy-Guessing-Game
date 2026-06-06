@@ -1,7 +1,7 @@
 describe("generateWinningNumber function", function() {
     it('returns a random number between 1 and 100', function() {
         spyOn(Math, 'random').and.returnValue(0.155);
-        expect(generateWinningNumber()).toEqual(16)
+        expect(generateWinningNumber()).toEqual(16);
         Math.random.and.returnValue(0.0000034);
         expect(generateWinningNumber()).toEqual(1);
         Math.random.and.returnValue(0.9999934);

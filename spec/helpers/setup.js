@@ -10,7 +10,7 @@ global.document = {};
 const noop = () => stub;
 const stub = {
   click: noop, on: noop, val: () => '', text: noop,
-  attr: noop, prop: noop, focus: noop, ready: noop,
+  prop: noop, focus: noop, ready: noop,
 };
 global.$ = () => stub;
 

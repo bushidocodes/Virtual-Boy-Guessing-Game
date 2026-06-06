@@ -24,7 +24,7 @@ describe("shuffle function", function() {
         const unshuffledArray = [20, 50, 70];
         const shuffledArray = shuffle(unshuffledArray);
         expect(shuffledArray.length).toEqual(3);
-        expect(shuffledArray === unshuffledArray).toEqual(true);
+        expect(shuffledArray).toBe(unshuffledArray);
     });
 });
 
@@ -126,21 +126,21 @@ describe("Game class", function() {
                 game.playersGuessSubmission(4);
                 expect(game.playersGuessSubmission(5)).toContain('You Lose');
             });
-            it('returns "You\'re burning up!" if the difference between playersGuess and winningGuess is less than 10', function() {
+            it(`returns "You're burning up!" if the difference between playersGuess and winningGuess is less than 10`, function() {
                 game.winningNumber = 42;
-                expect(game.playersGuessSubmission(45)).toEqual('You\'re burning up!');
+                expect(game.playersGuessSubmission(45)).toEqual("You're burning up!");
             });
-            it('returns "You\'re lukewarm." if the difference between playersGuess and winningGuess is less than 25', function() {
+            it(`returns "You're lukewarm." if the difference between playersGuess and winningGuess is less than 25`, function() {
                 game.winningNumber = 42;
-                expect(game.playersGuessSubmission(62)).toEqual('You\'re lukewarm.');
+                expect(game.playersGuessSubmission(62)).toEqual("You're lukewarm.");
             });
-            it('returns "You\'re a bit chilly." if the difference between playersGuess and winningGuess is less than 50', function() {
+            it(`returns "You're a bit chilly." if the difference between playersGuess and winningGuess is less than 50`, function() {
                 game.winningNumber = 42;
-                expect(game.playersGuessSubmission(72)).toEqual('You\'re a bit chilly.');
+                expect(game.playersGuessSubmission(72)).toEqual("You're a bit chilly.");
             });
-            it('returns "You\'re ice cold!" if the difference between playersGuess and winningGuess is less than 100', function() {
+            it(`returns "You're ice cold!" if the difference between playersGuess and winningGuess is less than 100`, function() {
                 game.winningNumber = 42;
-                expect(game.playersGuessSubmission(92)).toEqual('You\'re ice cold!');
+                expect(game.playersGuessSubmission(92)).toEqual("You're ice cold!");
             });
         });
 

@@ -110,8 +110,8 @@ controller.enterPlayerGuess = function () {
 $(document).ready(function () {
     game = new Game();
     $('#submit').click(controller.enterPlayerGuess);
-    $('#players-input').keypress(function (event) {
-        if (event.which === 13) {
+    $('#players-input').on('keydown', function (event) {
+        if (event.key === 'Enter') {
             controller.enterPlayerGuess();
         }
     });

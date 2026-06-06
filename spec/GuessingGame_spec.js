@@ -113,7 +113,7 @@ describe("Game class", function() {
                 game.playersGuessSubmission(36);
                 expect(game.playersGuessSubmission(36)).toEqual('You have already guessed that number.');
             });
-            it('if playersGuess isn\'t the winningNumber or a duplicate, add it to pastGuesses', function() {
+            it("if playersGuess isn't the winningNumber or a duplicate, add it to pastGuesses", function() {
                 game.winningNumber = 42;
                 game.playersGuessSubmission(36);
                 expect(game.pastGuesses).toContain(36);

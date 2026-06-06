@@ -48,11 +48,9 @@ describe("Game class", function() {
 
     describe('Game constructor', function() {
         it('initializes with empty state', function() {
-            spyOn(window, 'Game').and.callThrough();
-            game = new Game();
-            expect(game.playersGuess).toBeNull();
-            expect(game.pastGuesses).toEqual([]);
-            expect(Game).toHaveBeenCalled();
+            const newGame = new Game();
+            expect(newGame.playersGuess).toBeNull();
+            expect(newGame.pastGuesses).toEqual([]);
         });
     });
 

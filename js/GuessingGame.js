@@ -27,55 +27,57 @@ function shuffle(arr) {
     return arr;
 }
 
-function Game() {
-    this.playersGuess = null;
-    this.pastGuesses = [];
-    this.winningNumber = generateWinningNumber();
-}
-
-Game.prototype.difference = function () {
-    return Math.abs(this.playersGuess - this.winningNumber);
-};
-
-Game.prototype.isLower = function () {
-    return this.playersGuess < this.winningNumber;
-};
-
-Game.prototype.playersGuessSubmission = function (guess) {
-    if (typeof guess === 'number' && Number.isInteger(guess) && guess >= 1 && guess <= 100) {
-        this.playersGuess = guess;
-        return this.checkGuess();
+class Game {
+    constructor() {
+        this.playersGuess = null;
+        this.pastGuesses = [];
+        this.winningNumber = generateWinningNumber();
     }
-    throw 'That is an invalid guess.';
-};
 
-Game.prototype.checkGuess = function () {
-    if (this.playersGuess === this.winningNumber) {
+    difference() {
+        return Math.abs(this.playersGuess - this.winningNumber);
+    }
+
+    isLower() {
+        return this.playersGuess < this.winningNumber;
+    }
+
+    playersGuessSubmission(guess) {
+        if (typeof guess === 'number' && Number.isInteger(guess) && guess >= 1 && guess <= 100) {
+            this.playersGuess = guess;
+            return this.checkGuess();
+        }
+        throw 'That is an invalid guess.';
+    }
+
+    checkGuess() {
+        if (this.playersGuess === this.winningNumber) {
+            this.pastGuesses.push(this.playersGuess);
+            return 'You Win!';
+        }
+        if (this.pastGuesses.includes(this.playersGuess)) {
+            return 'You have already guessed that number.';
+        }
         this.pastGuesses.push(this.playersGuess);
-        return 'You Win!';
+        if (this.pastGuesses.length >= 5) {
+            return `You Lose. Was ${this.winningNumber}`;
+        }
+        const diff = this.difference();
+        if (diff < 10) {
+            return "You're burning up!";
+        } else if (diff < 25) {
+            return "You're lukewarm.";
+        } else if (diff < 50) {
+            return "You're a bit chilly.";
+        } else {
+            return "You're ice cold!";
+        }
     }
-    if (this.pastGuesses.includes(this.playersGuess)) {
-        return 'You have already guessed that number.';
-    }
-    this.pastGuesses.push(this.playersGuess);
-    if (this.pastGuesses.length >= 5) {
-        return `You Lose. Was ${this.winningNumber}`;
-    }
-    const diff = this.difference();
-    if (diff < 10) {
-        return "You're burning up!";
-    } else if (diff < 25) {
-        return "You're lukewarm.";
-    } else if (diff < 50) {
-        return "You're a bit chilly.";
-    } else {
-        return "You're ice cold!";
-    }
-};
 
-Game.prototype.provideHint = function () {
-    return shuffle([this.winningNumber, generateWinningNumber(), generateWinningNumber()]);
-};
+    provideHint() {
+        return shuffle([this.winningNumber, generateWinningNumber(), generateWinningNumber()]);
+    }
+}
 
 const controller = {};
 controller.enterPlayerGuess = function () {

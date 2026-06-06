@@ -43,7 +43,8 @@ describe("Game class", function() {
         spyOn(window, 'generateWinningNumber').and.callThrough();
         game = new Game();
         expect(generateWinningNumber).toHaveBeenCalled();
-        expect(typeof game.winningNumber).toBe('number');
+        expect(game.winningNumber).toBeGreaterThan(0);
+        expect(game.winningNumber).toBeLessThan(101);
     });
 
     describe("Game methods", function() {
@@ -59,7 +60,7 @@ describe("Game class", function() {
         });
 
         describe('isLower method', function() {
-            it('returns true if the playersGuess is lower than winningNumber, and false if not.', function() {
+            it('returns true if the playersGuess is lower than winningNumber, and false if not', function() {
                 game.playersGuess = 20;
                 game.winningNumber = 10;
                 expect(game.isLower()).toBeFalse();

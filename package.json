@@ -9,7 +9,7 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "jasmine": "^6.2.0",
+    "jasmine": "^6.3.0",
     "serve": "^14.2.6"
   }
 }

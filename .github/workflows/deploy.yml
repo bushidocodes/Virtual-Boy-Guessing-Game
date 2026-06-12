@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [master]
+  pull_request:
+    branches: [master]
   workflow_dispatch:
 
 permissions:
@@ -27,6 +29,7 @@ jobs:
       - run: npm test
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: test
     environment:
       name: github-pages

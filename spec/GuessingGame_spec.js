@@ -40,11 +40,10 @@ describe("Game class", function() {
     });
 
     it('sets winningNumber by calling generateWinningNumber', function() {
-        spyOn(window, 'generateWinningNumber').and.callThrough();
+        spyOn(Math, 'random').and.returnValue(0.5);
         game = new Game();
-        expect(generateWinningNumber).toHaveBeenCalled();
-        expect(game.winningNumber).toBeGreaterThan(0);
-        expect(game.winningNumber).toBeLessThan(101);
+        expect(Math.random).toHaveBeenCalled();
+        expect(game.winningNumber).toBe(51);
     });
 
     describe("Game methods", function() {
@@ -153,14 +152,18 @@ describe("Game class", function() {
                 expect(hintArray).toContain(game.winningNumber);
             });
             it('calls generateWinningNumber to fill the rest of the hint array with random numbers', function() {
-                spyOn(window, 'generateWinningNumber');
-                game.provideHint();
-                expect(generateWinningNumber.calls.count()).toBe(2);
+                game.winningNumber = 42;
+                spyOn(Math, 'random').and.returnValue(0.5);
+                const hint = game.provideHint();
+                // Math.random=0.5 → generateWinningNumber returns 51; both decoys should be 51
+                expect(hint.filter(n => n === 51).length).toBe(2);
             });
             it('calls the shuffle function', function() {
-                spyOn(window, 'shuffle');
-                game.provideHint();
-                expect(shuffle).toHaveBeenCalled();
+                game.winningNumber = 100;
+                spyOn(Math, 'random').and.returnValue(0);
+                const hint = game.provideHint();
+                // Math.random=0 → generateWinningNumber returns 1; shuffle moves 100 to end
+                expect(hint).toEqual([1, 1, 100]);
             });
         });
 

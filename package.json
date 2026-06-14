@@ -7,7 +7,7 @@
     "test": "jasmine --config=spec/support/jasmine.json"
   },
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "devDependencies": {
     "jasmine": "^6.3.0",
     "serve": "^14.2.6"

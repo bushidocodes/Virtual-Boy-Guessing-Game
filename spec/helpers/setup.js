@@ -1,5 +1,8 @@
-const fs = require('fs');
-const path = require('path');
+import { readFileSync } from 'fs';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Expose browser globals that GuessingGame.js and the specs depend on
 global.window = global;
@@ -17,5 +20,5 @@ global.$ = () => stub;
 // Load source into global scope. Function declarations (generateWinningNumber, shuffle)
 // are promoted to the global object automatically. class Game is not, so append an
 // explicit globalThis assignment so spies can target it via window.Game.
-const src = fs.readFileSync(path.resolve(__dirname, '../../js/GuessingGame.js'), 'utf8');
+const src = readFileSync(resolve(__dirname, '../../js/GuessingGame.js'), 'utf8');
 (0, eval)(src + '\nglobalThis.Game = Game;');

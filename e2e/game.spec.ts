@@ -45,7 +45,7 @@ test('hint shows 3 numbers between 1-100 and disables the hint button', async ({
     await page.goto('/');
     await page.click('#hint');
     const hintText = await page.locator('#title').textContent();
-    const numbers = hintText.replace(/\?/g, '').trim().split(' ').map(Number);
+    const numbers = hintText!.replace(/\?/g, '').trim().split(' ').map(Number);
     expect(numbers).toHaveLength(3);
     for (const n of numbers) {
         expect(n).toBeGreaterThanOrEqual(1);

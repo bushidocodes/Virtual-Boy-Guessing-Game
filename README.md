@@ -22,4 +22,18 @@ Opens the game at http://localhost:3000.
 npm test
 ```
 
-Runs the Jasmine spec suite headlessly in Node.
+Runs the Vitest unit suite headlessly in Node.
+
+```sh
+npm run typecheck
+```
+
+Type-checks the TypeScript sources with `tsc --noEmit`.
+
+## Building
+
+```sh
+npm run build
+```
+
+Builds the production bundle to `dist/` with Vite.

@@ -9,33 +9,34 @@ A browser-based number guessing game styled after the Nintendo Virtual Boy (blac
 ## Commands
 
 ```sh
-npm install   # install dev dependencies (jasmine, serve)
-npm start     # serve the game at http://localhost:3000
-npm test      # run Jasmine specs headlessly in Node
+npm install        # install dev dependencies (vite, typescript, vitest, playwright)
+npm start          # serve the game via Vite at http://localhost:3000
+npm run build      # build the production bundle to dist/
+npm run typecheck  # type-check the sources with tsc --noEmit
+npm test           # run Vitest unit specs headlessly in Node
+npm run test:e2e   # run Playwright end-to-end specs (needs `npm run test:e2e:install` once)
 ```
 
 ## Testing
 
-`npm test` runs `js/GuessingGame_spec.js` via Jasmine in Node. The setup helper (`spec/helpers/setup.js`) stubs `window` and jQuery so the game logic loads without a browser.
+`npm test` runs `spec/GuessingGame.spec.ts` via Vitest in Node. Vitest transpiles TypeScript on the fly, so no build step is needed; globals (`describe`, `it`, `expect`) are enabled in `vitest.config.ts`.
 
-`test.html` is a browser-based alternative runner (open via `npm start` then navigate to `/test.html`). It loads Jasmine 2.4.1 from CDN.
-
-The spec file is excluded from the production `index.html` via an HTML comment.
+`npm run test:e2e` runs `e2e/game.spec.ts` via Playwright (Chromium). `playwright.config.ts` boots the Vite dev server (`npm start`) automatically before the run.
 
 ## Architecture
 
-`js/GuessingGame.js` is the only application file. It is structured in two layers with no modules — everything is global:
+The app is written in TypeScript (ESM, no framework) and bundled by Vite. `index.html` loads `js/controller.ts` as a module entry; Vite resolves the `./GuessingGame.js` import specifier to `GuessingGame.ts`.
 
-**Game logic layer** (pure, testable):
+**Game logic layer** — `js/GuessingGame.ts` (pure, unit-tested):
 - `generateWinningNumber()` — returns random integer 1–100
 - `shuffle(arr)` — Fisher-Yates in-place shuffle
-- `Game` constructor + prototype methods: `difference()`, `isLower()`, `playersGuessSubmission()`, `checkGuess()`, `provideHint()`
+- `Game` class with methods: `difference()`, `isLower()`, `playersGuessSubmission()`, `checkGuess()`, `provideHint()`. State (`playersGuess`, `pastGuesses`, `winningNumber`) is held as typed instance fields. `playersGuessSubmission` takes `unknown` and narrows at runtime, so invalid-input tests type-check.
 
-**Controller layer** (DOM/jQuery, not unit tested):
+**Controller layer** — `js/controller.ts` (DOM, not unit tested):
 - `controller` object with `enterPlayerGuess()` method — reads `#players-input`, calls `game.playersGuessSubmission()`, updates `#title`, `#subtitle`, and the `#guess-list` `<li>` elements
-- `$(document).ready(...)` wires up `#submit`, `#reset`, and `#hint` button click handlers
+- a `DOMContentLoaded` handler wires up `#submit`, `#reset`, and `#hint` click handlers (plus Enter-to-submit on the input)
 
-The `game` variable is a global `Game` instance. Resetting replaces it with `new Game()` and resets the DOM.
+The `game` variable is a module-scoped `Game` instance. Resetting replaces it with `new Game()` and resets the DOM.
 
 ## CSS Layout
 

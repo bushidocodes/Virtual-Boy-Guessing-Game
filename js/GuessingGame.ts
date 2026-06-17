@@ -9,13 +9,13 @@
 // |                  ||``||  \\ ||``|| ||//  ||,, //  \/  \\  ||                |
 // ```````````````````````````````````````````````````````````````````````````````
 
-export function generateWinningNumber() {
+export function generateWinningNumber(): number {
     return Math.floor(Math.random() * 100 + 1);
 }
 
 // Implements Fisher-Yates Algorithm
 // https://www.frankmitchell.org/2015/01/fisher-yates/
-export function shuffle(arr) {
+export function shuffle(arr: number[]): number[] {
     for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         const temp = arr[i];
@@ -26,21 +26,25 @@ export function shuffle(arr) {
 }
 
 export class Game {
+    playersGuess: number | null;
+    pastGuesses: number[];
+    winningNumber: number;
+
     constructor() {
         this.playersGuess = null;
         this.pastGuesses = [];
         this.winningNumber = generateWinningNumber();
     }
 
-    difference() {
-        return Math.abs(this.playersGuess - this.winningNumber);
+    difference(): number {
+        return Math.abs(this.playersGuess! - this.winningNumber);
     }
 
-    isLower() {
-        return this.playersGuess < this.winningNumber;
+    isLower(): boolean {
+        return this.playersGuess! < this.winningNumber;
     }
 
-    playersGuessSubmission(guess) {
+    playersGuessSubmission(guess: unknown): string {
         if (typeof guess === 'number' && Number.isInteger(guess) && guess >= 1 && guess <= 100) {
             this.playersGuess = guess;
             return this.checkGuess();
@@ -48,15 +52,16 @@ export class Game {
         throw new Error('That is an invalid guess.');
     }
 
-    checkGuess() {
-        if (this.playersGuess === this.winningNumber) {
-            this.pastGuesses.push(this.playersGuess);
+    checkGuess(): string {
+        const guess = this.playersGuess!;
+        if (guess === this.winningNumber) {
+            this.pastGuesses.push(guess);
             return 'You Win!';
         }
-        if (this.pastGuesses.includes(this.playersGuess)) {
+        if (this.pastGuesses.includes(guess)) {
             return 'You have already guessed that number.';
         }
-        this.pastGuesses.push(this.playersGuess);
+        this.pastGuesses.push(guess);
         if (this.pastGuesses.length >= 5) {
             return `You Lose. Was ${this.winningNumber}`;
         }
@@ -72,7 +77,7 @@ export class Game {
         }
     }
 
-    provideHint() {
+    provideHint(): number[] {
         return shuffle([this.winningNumber, generateWinningNumber(), generateWinningNumber()]);
     }
 }

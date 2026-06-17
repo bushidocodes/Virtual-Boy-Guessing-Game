@@ -32,7 +32,7 @@ describe('shuffle', () => {
 });
 
 describe('Game', () => {
-    let game;
+    let game: Game;
 
     beforeEach(() => {
         game = new Game();

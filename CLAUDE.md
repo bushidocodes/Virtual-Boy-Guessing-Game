@@ -9,19 +9,19 @@ A browser-based number guessing game styled after the Nintendo Virtual Boy (blac
 ## Commands
 
 ```sh
-npm install        # install dev dependencies (vite, typescript, vitest, playwright)
-npm start          # serve the game via Vite at http://localhost:3000
-npm run build      # build the production bundle to dist/
-npm run typecheck  # type-check the sources with tsc --noEmit
-npm test           # run Vitest unit specs headlessly in Node
-npm run test:e2e   # run Playwright end-to-end specs (needs `npm run test:e2e:install` once)
+pnpm install        # install dev dependencies (vite, typescript, vitest, playwright)
+pnpm start          # serve the game via Vite at http://localhost:3000
+pnpm run build      # build the production bundle to dist/
+pnpm run typecheck  # type-check the sources with tsc --noEmit
+pnpm test           # run Vitest unit specs headlessly in Node
+pnpm run test:e2e   # run Playwright end-to-end specs (needs `pnpm run test:e2e:install` once)
 ```
 
 ## Testing
 
-`npm test` runs `spec/GuessingGame.spec.ts` via Vitest in Node. Vitest transpiles TypeScript on the fly, so no build step is needed; globals (`describe`, `it`, `expect`) are enabled in `vitest.config.ts`.
+`pnpm test` runs `spec/GuessingGame.spec.ts` via Vitest in Node. Vitest transpiles TypeScript on the fly, so no build step is needed; globals (`describe`, `it`, `expect`) are enabled in `vitest.config.ts`.
 
-`npm run test:e2e` runs `e2e/game.spec.ts` via Playwright (Chromium). `playwright.config.ts` boots the Vite dev server (`npm start`) automatically before the run.
+`pnpm run test:e2e` runs `e2e/game.spec.ts` via Playwright (Chromium). `playwright.config.ts` boots the Vite dev server (`pnpm start`) automatically before the run.
 
 ## Architecture
 

@@ -2,6 +2,7 @@
   "name": "virtual-boy-guessing-game",
   "version": "1.0.0",
   "description": "A simple guessing game web application using a vector art style inspired by the Nintendo Virtual Boy",
+  "packageManager": "pnpm@11.5.0",
   "scripts": {
     "start": "vite --port 3000",
     "build": "vite build",

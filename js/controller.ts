@@ -20,11 +20,11 @@ const controller = {
                 document.getElementById('subtitle')!.textContent =
                     game.isLower() ? 'Guess Higher' : 'Guess Lower';
             }
-            game.pastGuesses.forEach((pastGuess, i) => {
+            game.pastGuesses.entries().forEach(([i, pastGuess]) => {
                 document.querySelector(`#guess-list li:nth-child(${i + 1})`)!.textContent = String(pastGuess);
             });
         } catch (err) {
-            document.getElementById('title')!.textContent = (err as Error).message;
+            document.getElementById('title')!.textContent = Error.isError(err) ? err.message : String(err);
             if (game.pastGuesses.length > 0) {
                 const lastGuess = game.pastGuesses.at(-1);
                 const direction = game.isLower() ? 'Higher' : 'Lower';

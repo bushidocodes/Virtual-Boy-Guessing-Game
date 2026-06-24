@@ -24,7 +24,7 @@ const controller = {
                 document.querySelector(`#guess-list li:nth-child(${i + 1})`)!.textContent = String(pastGuess);
             });
         } catch (err) {
-            document.getElementById('title')!.textContent = Error.isError(err) ? err.message : String(err);
+            document.getElementById('title')!.textContent = err instanceof Error ? err.message : String(err);
             if (game.pastGuesses.length > 0) {
                 const lastGuess = game.pastGuesses.at(-1);
                 const direction = game.isLower() ? 'Higher' : 'Lower';

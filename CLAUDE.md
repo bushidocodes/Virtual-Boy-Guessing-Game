@@ -28,11 +28,13 @@ pnpm run test:e2e   # run Playwright end-to-end specs (needs `pnpm run test:e2e:
 The app is written in TypeScript (ESM, no framework) and bundled by Vite. `index.html` loads `js/controller.ts` as a module entry; Vite resolves the `./GuessingGame.js` import specifier to `GuessingGame.ts`.
 
 **Game logic layer** — `js/GuessingGame.ts` (pure, unit-tested):
+
 - `generateWinningNumber()` — returns random integer 1–100
 - `shuffle(arr)` — Fisher-Yates in-place shuffle
 - `Game` class with methods: `difference()`, `isLower()`, `playersGuessSubmission()`, `checkGuess()`, `provideHint()`. State (`playersGuess`, `pastGuesses`, `winningNumber`) is held as typed instance fields. `playersGuessSubmission` takes `unknown` and narrows at runtime, so invalid-input tests type-check.
 
 **Controller layer** — `js/controller.ts` (DOM, not unit tested):
+
 - `controller` object with `enterPlayerGuess()` method — reads `#players-input`, calls `game.playersGuessSubmission()`, updates `#title`, `#subtitle`, and the `#guess-list` `<li>` elements
 - a `DOMContentLoaded` handler wires up `#submit`, `#reset`, and `#hint` click handlers (plus Enter-to-submit on the input)
 
